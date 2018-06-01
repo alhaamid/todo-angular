@@ -1,0 +1,31 @@
+
+<div>
+  <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" [routerLink]=gs.LANDINGPAGE> {{gs.APPNAME}} </a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/shared">Shared Notes</a></li>
+          <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/reminders">Reminders</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+            <ul class="dropdown-menu">
+              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/your-account">Your Account</a></li>
+              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+</div>
+
+
+
+<!-- <nav>
+  <ul>
+    <li routerLinkActive="active current" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/login" >Login</a></li>
+    <li routerLinkActive="active current" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/dashboard" >Dashboard</a></li>
+  </ul>
+</nav> -->

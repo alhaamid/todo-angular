@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    padding: 40px 80px 40px 80px;
+}
+
+/* a {
+    display: block;
+}
+
+a.active {
+    color: red; 
+} */
+
+/* This is for highlighting incorrect first name field */
+/* .form-control.ng-touched.ng-invalid {
+    border: 2px solid red
+} */
