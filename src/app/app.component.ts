@@ -1,4 +1,6 @@
+import { GlobalsService } from './services/globals.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title: string
+  redirectPage: string[]
+
+  constructor(public router: Router, gs: GlobalsService) {
+    this.title = gs.APPNAME
+    this.redirectPage = gs.LANDINGPAGE
+
+    router.navigate(this.redirectPage)
+  }
 }
