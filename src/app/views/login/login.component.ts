@@ -1,3 +1,4 @@
+import { GlobalsService } from './../../services/globals.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   userName: string;
   nextPage: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private afa: AngularFireAuth) {
+  constructor(private authService: AuthService, private gs: GlobalsService, private router: Router) {
     console.log("loaded login. loggedin: ", authService.isLoggedIn());
 
     // afa.authState.subscribe(auth => {
@@ -23,6 +24,19 @@ export class LoginComponent implements OnInit {
     //     this.router.navigate([this.nextPage]);
     //   }
     // })
+  }
+
+  signIn() {
+    // show animation for signing in
+    this.authService.signInWithGoogle()
+    .then(userCredentials => {
+      if (userCredentials) {
+        this.router.navigate(this.gs.LANDING_PAGE.NAV);
+      }
+    }).catch(errorMsg => {
+      // show error for rejection
+      this.router.navigate(this.gs.LOGIN_PAGE.NAV);
+    })
   }
 
   // signInWithGoogle() {

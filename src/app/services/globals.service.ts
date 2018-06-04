@@ -4,10 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalsService {
-  public APPNAME:           string = 'To Do'
-  public LANDINGPAGE_NAV:   string[] = ['']
-  public LOGINPAGE_NAV:     string[] = ['login']
-  public LOGINPAGE_STR:     string = '/login';
+  public APPNAME: string = 'To Do';
+
+  public LANDING_PAGE = new pageDetails('', '/', ['']);
+  public LOGIN_PAGE = new pageDetails('login', '/login', ['login']);
+  public REMINDERS_PAGE = new pageDetails('reminders', '/reminders', ['reminders']);
+  public SETTINGS_PAGE = new pageDetails('settings', '/settings', ['settings']);
+  public YOUR_ACCOUNT_PAGE = new pageDetails('your-account', '/your-account', ['your-account']);
 
   // public DEBUG: boolean = true;
 
@@ -18,6 +21,10 @@ export class GlobalsService {
   // }
 
   constructor() { }
+}
+
+class pageDetails {
+  constructor(public STR: string, public ROUTE: string, public NAV: string[]) {}
 }
 
 export interface firestoreUserDetails {
