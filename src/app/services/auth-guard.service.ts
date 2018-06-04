@@ -27,7 +27,9 @@ export class AuthGuardService {
             this.authService.userDetails = null;
             console.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
             console.log("navigating to login page");
-            this.router.navigate(this.gs.LOGINPAGE_NAV);
+            if (!(this.router.url === this.gs.LOGINPAGE_STR)) {
+              this.router.navigate(this.gs.LOGINPAGE_NAV);
+            }
             res(false);
           }
         });

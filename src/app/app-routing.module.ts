@@ -18,15 +18,18 @@ const routes: Routes = [
   },
   {
     path: 'shared',
-    component: SharedComponent
+    component: SharedComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'reminders',
-    component: RemindersComponent
+    component: RemindersComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'your-account',
-    component: YourAccountComponent
+    component: YourAccountComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
@@ -34,7 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    canActivate: [AuthGuardService],
   }
 ];
 
