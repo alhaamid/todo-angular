@@ -12,7 +12,6 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { LoginComponent } from './views/login/login.component';
 import { MenuComponent } from './views/menu/menu.component';
 import { SettingsComponent } from './views/settings/settings.component';
-import { SharedComponent } from './views/shared/shared.component';
 import { RemindersComponent } from './views/reminders/reminders.component';
 import { YourAccountComponent } from './views/your-account/your-account.component';
 
@@ -30,7 +29,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     LoginComponent,
     MenuComponent,
     SettingsComponent,
-    SharedComponent,
     RemindersComponent,
     YourAccountComponent
   ],

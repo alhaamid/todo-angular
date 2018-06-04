@@ -17,11 +17,6 @@ const routes: Routes = [
     // resolve: [AuthResolveService]
   },
   {
-    path: 'shared',
-    component: SharedComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
     path: 'reminders',
     component: RemindersComponent,
     canActivate: [AuthGuardService],

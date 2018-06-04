@@ -21,9 +21,8 @@ export class GlobalsService {
 }
 
 export interface firestoreUserDetails {
-  uid: string;
+  userId: string;
   email: string;
   photoURL?: string;
   displayName?: string;
-  favoriteColor: string;
 }
