@@ -4,8 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalsService {
-  public APPNAME: string = 'To Do'
-  public LANDINGPAGE: string[] = ['dashboard']
+  public APPNAME:           string = 'To Do'
+  public LANDINGPAGE_NAV:   string[] = ['']
+  public LOGINPAGE_NAV:     string[] = ['login']
+  public LOGINPAGE_STR:     string = '/login';
 
   constructor() { }
 }

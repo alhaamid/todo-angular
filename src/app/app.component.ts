@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string
-  redirectPage: string[]
+  // title: string;
+  // redirectPage: string[];
 
   constructor(public router: Router, gs: GlobalsService) {
-    this.title = gs.APPNAME
-    this.redirectPage = gs.LANDINGPAGE
+    // this.title = gs.APPNAME;
+    // this.redirectPage = gs.LANDINGPAGE_NAV;
 
-    router.navigate(this.redirectPage)
+    // router.navigate(this.redirectPage);
   }
 }

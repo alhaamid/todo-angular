@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { GlobalsService } from './../../services/globals.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public gs: GlobalsService) { }
+  constructor(private gs: GlobalsService, private authService: AuthService) { }
 
   ngOnInit() {
   }
