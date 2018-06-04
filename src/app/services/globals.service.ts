@@ -9,5 +9,21 @@ export class GlobalsService {
   public LOGINPAGE_NAV:     string[] = ['login']
   public LOGINPAGE_STR:     string = '/login';
 
+  // public DEBUG: boolean = true;
+
+  // log(...args) {
+  //   if (this.DEBUG) {
+  //     console.log(...args);
+  //   }
+  // }
+
   constructor() { }
+}
+
+export interface firestoreUserDetails {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor: string;
 }

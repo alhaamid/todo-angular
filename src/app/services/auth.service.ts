@@ -1,4 +1,4 @@
-import { GlobalsService } from './globals.service';
+import { GlobalsService, firestoreUserDetails } from './globals.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -8,42 +8,22 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable, of } from 'rxjs';
 
-interface firestoreUserDetails {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-
-  customAttr: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   public authState: Observable<firebase.User>;
-  public user2: Observable<firestoreUserDetails>;
-  public userDetails: firebase.User;
-  /**
-   * displayName
-   * email
-   * photoURL
-   * uid
-   * customAttr
-   */
+  public userDetails: Observable<firestoreUserDetails>;
 
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private router: Router, private gs: GlobalsService) {
     this.authState = afa.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.user2 = this.afs.doc<firestoreUserDetails>(`users/${user.uid}`).valueChanges();
+        this.userDetails = this.afs.doc<firestoreUserDetails>(`users/${user.uid}`).valueChanges();
       } else {
-        this.user2 = of(null);
+        this.userDetails = of(null);
       }
-      this.user2.subscribe(res => {
-        console.log("res:", res);
-      })
     });
   }
 
@@ -80,7 +60,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      customAttr: "green"
+      favoriteColor: "Yellow. Yes I remember :P"
     }
 
     return userRef.set(data);
