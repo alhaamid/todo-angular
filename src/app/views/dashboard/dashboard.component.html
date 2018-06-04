@@ -1,3 +1,9 @@
-<p>
-  dashboard works!
-</p>
+<div *ngIf="this.details">
+  <h3>User details</h3>
+
+  <p>Name: {{this.details.displayName}}</p>
+  <p>Email: {{this.details.email}}</p>
+  <p>PhotoURL: {{this.details.photoURL}}</p>
+  <p>ID: {{this.details.uid}}</p>
+  <p>Favorite Color: {{this.details.favoriteColor}}</p>
+</div>

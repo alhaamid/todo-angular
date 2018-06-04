@@ -3,7 +3,7 @@
   <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" [routerLink]=gs.LANDINGPAGE> {{gs.APPNAME}} </a>
+          <a class="navbar-brand" routerLink="{{gs.LANDINGPAGE}}"> {{gs.APPNAME}} </a>
         </div>
 
         <ul class="nav navbar-nav navbar-right">
@@ -13,6 +13,7 @@
             <ul class="dropdown-menu">
               <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/your-account">Your Account</a></li>
               <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li>
+              <li><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li>
             </ul>
           </li>
         </ul>

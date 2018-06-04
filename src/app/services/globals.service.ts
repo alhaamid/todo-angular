@@ -4,8 +4,26 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GlobalsService {
-  public APPNAME: string = 'To Do'
-  public LANDINGPAGE: string[] = ['dashboard']
+  public APPNAME:           string = 'To Do'
+  public LANDINGPAGE_NAV:   string[] = ['']
+  public LOGINPAGE_NAV:     string[] = ['login']
+  public LOGINPAGE_STR:     string = '/login';
+
+  // public DEBUG: boolean = true;
+
+  // log(...args) {
+  //   if (this.DEBUG) {
+  //     console.log(...args);
+  //   }
+  // }
 
   constructor() { }
+}
+
+export interface firestoreUserDetails {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor: string;
 }

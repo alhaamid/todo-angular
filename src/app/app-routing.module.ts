@@ -1,3 +1,5 @@
+import { AuthResolveService } from './services/auth-resolve.service';
+import { AuthGuardService } from './services/auth-guard.service';
 import { YourAccountComponent } from './views/your-account/your-account.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
@@ -10,7 +12,9 @@ import { RemindersComponent } from './views/reminders/reminders.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuardService],
+    // resolve: [AuthResolveService]
   },
   {
     path: 'shared',
@@ -23,10 +27,6 @@ const routes: Routes = [
   {
     path: 'your-account',
     component: YourAccountComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
   },
   {
     path: 'login',
