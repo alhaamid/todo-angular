@@ -13,7 +13,7 @@
             <ul class="dropdown-menu">
               <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/your-account">Your Account</a></li>
               <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li>
-              <li><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li>
+              <li *ngIf="this.authService.isLoggedIn()"><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li>
             </ul>
           </li>
         </ul>
