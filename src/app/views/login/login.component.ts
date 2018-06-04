@@ -16,14 +16,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private gs: GlobalsService, private router: Router) {
     console.log("loaded login. loggedin: ", authService.isLoggedIn());
-
-    // afa.authState.subscribe(auth => {
-    //   if (auth) {
-    //     // console.log(auth)
-    //     this.userName = auth.displayName;
-    //     this.router.navigate([this.nextPage]);
-    //   }
-    // })
   }
 
   signIn() {
@@ -38,15 +30,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(this.gs.LOGIN_PAGE.NAV);
     })
   }
-
-  // signInWithGoogle() {
-  //   this.authService.signInWithGoogle()
-  //   .then((res) => {
-  //       this.router.navigate([this.nextPage]);
-  //       console.log("navigating from login to", this.nextPage)
-  //     })
-  //   .catch((err) => console.log("ERROR: " + err));
-  // }
 
   ngOnInit() {
   }
