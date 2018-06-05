@@ -12,13 +12,7 @@ export class GlobalsService {
   public SETTINGS_PAGE = new pageDetails('settings', '/settings', ['settings']);
   public YOUR_ACCOUNT_PAGE = new pageDetails('your-account', '/your-account', ['your-account']);
 
-  // public DEBUG: boolean = true;
-
-  // log(...args) {
-  //   if (this.DEBUG) {
-  //     console.log(...args);
-  //   }
-  // }
+  public DEBUG: boolean = false;
 
   constructor() { }
 }

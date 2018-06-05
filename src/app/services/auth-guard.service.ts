@@ -13,7 +13,7 @@ export class AuthGuardService {
   canActivate(): Promise<boolean> {
     return new Promise<boolean>((res, rej) => {
       if (this.authService.isLoggedIn()) {
-        console.log("good to go.");
+        if (this.gs.DEBUG)console.log("good to go.");
         res(true);
       } else {
         /* The following block makes sure that if the user didn't log out, 
@@ -21,12 +21,12 @@ export class AuthGuardService {
         this.authService.authState.subscribe( (user) => {
           if (user) {
             this.authService.userDetails = this.afs.doc<firestoreUserDetails>(`users/${user.uid}`).valueChanges();
-            console.log("Authenticated in auth-guard:", this.authService.isLoggedIn(), "for", this.router.url);
+            if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn(), "for", this.router.url);
             res(true);
           } else {
             this.authService.userDetails = null;
-            console.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
-            console.log("navigating to login page");
+            if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
+            if (this.gs.DEBUG) console.log("navigating to login page");
             if (!(this.router.url === this.gs.LOGIN_PAGE.ROUTE)) {
               this.router.navigate(this.gs.LOGIN_PAGE.NAV);
             }

@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   nextPage: string = '';
 
   constructor(private authService: AuthService, private gs: GlobalsService, private router: Router) {
-    console.log("loaded login. loggedin: ", authService.isLoggedIn());
+    if (this.gs.DEBUG) console.log("loaded login. loggedin: ", authService.isLoggedIn());
   }
 
   signIn() {

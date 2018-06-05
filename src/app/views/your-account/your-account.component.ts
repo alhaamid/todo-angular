@@ -13,7 +13,7 @@ export class YourAccountComponent implements OnInit {
   details: firestoreUserDetails = null;
 
   constructor(private gs: GlobalsService, private authService: AuthService) {
-    console.log("constructor called");
+    if (this.gs.DEBUG) console.log("subscribed to local copy of user details.");
     this.detailsSubscription.add(this.authService.userDetails.subscribe(res => {
       this.details = res;
     }));
@@ -24,7 +24,7 @@ export class YourAccountComponent implements OnInit {
 
   ngOnDestroy() {
     this.detailsSubscription.unsubscribe();
-    console.log("unsubcribed");
+    if (this.gs.DEBUG) console.log("unsubcribed");
   }
 
 }
