@@ -3,16 +3,43 @@
   <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" [routerLink]=gs.LANDINGPAGE> {{gs.APPNAME}} </a>
+          <a class="navbar-brand" routerLink="{{gs.LANDING_PAGE.ROUTE}}"> {{gs.APPNAME}} </a>
         </div>
 
         <ul class="nav navbar-nav navbar-right">
-          <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/shared">Shared Notes</a></li>
-          <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/reminders">Reminders</a></li>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+          
+          <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}">
+              <span class="glyphicon glyphicon-time"></span>
+              Reminders
+            </a>
+          </li>
+
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-menu-down"></span></a>
             <ul class="dropdown-menu">
-              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/your-account">Your Account</a></li>
-              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li>
+
+              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span>
+                  Your Account
+                </a>
+              </li>
+              
+              <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="{{gs.SETTINGS_PAGE.ROUTE}}" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-wrench"></span>
+                  Settings
+                </a>
+              </li>
+
+              <li *ngIf="this.authService.isLoggedIn()">
+                <a routerLink="{{this.gs.LOGIN_PAGE.ROUTE}}" class="dropdown-toggle" data-toggle="dropdown" (click)="this.authService.logout()">
+                  <span class="glyphicon glyphicon-log-out"></span>
+                  Logout
+                </a>
+              </li>
+              <!-- <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li> -->
+              <!-- <li *ngIf="this.authService.isLoggedIn()"><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li> -->
             </ul>
           </li>
         </ul>
