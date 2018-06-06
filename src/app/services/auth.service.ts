@@ -1,4 +1,4 @@
-import { GlobalsService, firestoreUserDetails } from './globals.service';
+import { GlobalsService, firestoreUser } from './globals.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -14,13 +14,13 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
   public authState: Observable<firebase.User>;
-  public userDetails: Observable<firestoreUserDetails> = null;
+  public userDetails: Observable<firestoreUser> = null;
 
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private router: Router, private gs: GlobalsService) {
     this.authState = afa.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.userDetails = this.afs.doc<firestoreUserDetails>(`users/${user.uid}`).valueChanges();
+        this.userDetails = this.afs.doc<firestoreUser>(`users/${user.uid}`).valueChanges();
       } else {
         this.userDetails = null;
       }
@@ -43,9 +43,9 @@ export class AuthService {
   }
 
   updateUserData(user) {
-    const userRef: AngularFirestoreDocument<firestoreUserDetails> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<firestoreUser> = this.afs.doc(`users/${user.uid}`);
 
-    const data: firestoreUserDetails = {
+    const data: firestoreUser = {
       userId: user.uid,
       email: user.email,
       displayName: user.displayName,

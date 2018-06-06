@@ -1,3 +1,10 @@
-<p>
-  dashboard works!
-</p>
+<input type="text" [(ngModel)]="title" name="title" placeholder="Title.." ><br>
+<textarea [(ngModel)]="content" name="content" placeholder="Content.."></textarea><br>
+<input type="submit" value="Add a post" (click)=addNote()>
+
+<br>
+
+<div *ngFor="let note of notes | async">
+  <h2> Title: {{ note.title }} </h2>
+  <p> Content: {{ note.content }} </p>
+</div>

@@ -21,9 +21,18 @@ class pageDetails {
   constructor(public STR: string, public ROUTE: string, public NAV: string[]) {}
 }
 
-export interface firestoreUserDetails {
+export interface firestoreUser {
   userId: string;
   email: string;
   photoURL?: string;
   displayName?: string;
+}
+
+export interface Note {
+  title: string;
+  content: string;
+}
+
+export interface NoteId extends Note {
+  id: string;
 }
