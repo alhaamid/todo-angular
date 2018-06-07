@@ -1,8 +1,8 @@
-<div *ngIf="this.details">
+<div *ngIf="this.authService.userDetails">
   <h3>User details</h3>
 
-  <p>Name: {{this.details.displayName}}</p>
-  <p>Email: {{this.details.email}}</p>
-  <p>PhotoURL: {{this.details.photoURL}}</p>
-  <p>ID: {{this.details.userId}}</p>
+  <p>Name: {{this.authService.userDetails.displayName}}</p>
+  <p>Email: {{this.authService.userDetails.email}}</p>
+  <p>PhotoURL: {{this.authService.userDetails.photoURL}}</p>
+  <p>ID: {{this.authService.userDetails.userId}}</p>
 </div>

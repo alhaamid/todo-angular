@@ -1,5 +1,5 @@
 import { AuthService } from './../../services/auth.service';
-import { firestoreUser, GlobalsService } from './../../services/globals.service';
+import { FirestoreUser, GlobalsService } from './../../services/globals.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -10,21 +10,21 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class YourAccountComponent implements OnInit {
   detailsSubscription: Subscription = new Subscription();
-  details: firestoreUser = null;
+  // details: firestoreUser = null;
 
   constructor(private gs: GlobalsService, private authService: AuthService) {
-    if (this.gs.DEBUG) console.log("subscribed to local copy of user details.");
-    this.detailsSubscription.add(this.authService.userDetails.subscribe(res => {
-      this.details = res;
-    }));
+    // if (this.gs.DEBUG) console.log("subscribed to local copy of user details.");
+    // this.detailsSubscription.add(this.authService.userDetailsObservable.subscribe(res => {
+    //   this.details = res;
+    // }));
   }
 
   ngOnInit() {
   }
 
   ngOnDestroy() {
-    this.detailsSubscription.unsubscribe();
-    if (this.gs.DEBUG) console.log("unsubcribed");
+    // this.detailsSubscription.unsubscribe();
+    // if (this.gs.DEBUG) console.log("unsubcribed");
   }
 
 }

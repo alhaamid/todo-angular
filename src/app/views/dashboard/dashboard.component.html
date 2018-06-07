@@ -1,10 +1,36 @@
-<input type="text" [(ngModel)]="title" name="title" placeholder="Title.." ><br>
-<textarea [(ngModel)]="content" name="content" placeholder="Content.."></textarea><br>
-<input type="submit" value="Add a post" (click)=addNote()>
+<div class="addNoteSection">
+  <h2>Add a Note</h2>
+  <div class="noteForm">
 
-<br>
+    <input type="text" [(ngModel)]="newTitle" name="newTitle" placeholder="Title.." ><br>
 
+    <div class="content">
+
+      <button (click)=addTask()>Add task</button>
+
+      <div *ngFor="let newToDo of newToDos; index as i;">
+        <input type="text" [(ngModel)]="newToDo.task" name="newToDo.task" placeholder="Task..">
+        <input type="checkbox" [(ngModel)]="newToDo.done" name="newToDo.done" (change)=print()>
+      </div>
+
+    </div>
+
+    <input type="submit" value="Add this note" (click)=addNote()>
+
+  </div>
+</div>
+
+
+<h2>Your Notes</h2>
 <div *ngFor="let note of notes | async">
   <h2> Title: {{ note.title }} </h2>
-  <p> Content: {{ note.content }} </p>
+  <div class="content">
+    <div *ngFor="let todo of note.content.toDos; index as i;">
+      
+      <input type="text" [(ngModel)]="todo.task" name="todo.task">
+      <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" >
+    </div>
+
+  </div>
+  <button (click)="deleteNote(note.noteId)">Delete</button>
 </div>

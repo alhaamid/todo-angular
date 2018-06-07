@@ -1,5 +1,5 @@
 import { AngularFirestore } from 'angularfire2/firestore';
-import { GlobalsService, firestoreUser } from './globals.service';
+import { GlobalsService, FirestoreUser } from './globals.service';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router, CanActivate } from '@angular/router';
@@ -20,11 +20,15 @@ export class AuthGuardService {
         then the user won't be redirected to the login page and would be logged in behind the scene. */
         this.authService.authState.subscribe( (user) => {
           if (user) {
-            this.authService.userDetails = this.afs.doc<firestoreUser>(`users/${user.uid}`).valueChanges();
+            this.authService.userDetailsObservable = this.afs.doc<FirestoreUser>(`users/${user.uid}`).valueChanges();
+            this.authService.userDetailsObservable.subscribe(res => {
+              this.authService.userDetails = res;
+            })
+
             if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn(), "for", this.router.url);
             res(true);
           } else {
-            this.authService.userDetails = null;
+            this.authService.userDetailsObservable = null;
             if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
             if (this.gs.DEBUG) console.log("navigating to login page");
             if (!(this.router.url === this.gs.LOGIN_PAGE.ROUTE)) {

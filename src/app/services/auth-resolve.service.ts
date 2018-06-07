@@ -14,7 +14,7 @@ export class AuthResolveService implements Resolve<any> {
     
     return new Promise<any>((res, rej) => {
       if (this.authService.isLoggedIn()) {
-        res(this.authService.userDetails);
+        res(this.authService.userDetailsObservable);
       } else {
         res(false);
       }

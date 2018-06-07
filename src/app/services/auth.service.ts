@@ -1,4 +1,4 @@
-import { GlobalsService, firestoreUser } from './globals.service';
+import { GlobalsService, FirestoreUser } from './globals.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -14,15 +14,19 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
   public authState: Observable<firebase.User>;
-  public userDetails: Observable<firestoreUser> = null;
+  public userDetailsObservable: Observable<FirestoreUser> = null;
+  public userDetails: FirestoreUser = null;
 
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private router: Router, private gs: GlobalsService) {
     this.authState = afa.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.userDetails = this.afs.doc<firestoreUser>(`users/${user.uid}`).valueChanges();
+        this.userDetailsObservable = this.afs.doc<FirestoreUser>(`users/${user.uid}`).valueChanges();
+        this.userDetailsObservable.subscribe(res => {
+          this.userDetails = res;
+        });
       } else {
-        this.userDetails = null;
+        this.userDetailsObservable = null;
       }
     });
   }
@@ -43,9 +47,9 @@ export class AuthService {
   }
 
   updateUserData(user) {
-    const userRef: AngularFirestoreDocument<firestoreUser> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<FirestoreUser> = this.afs.doc(`users/${user.uid}`);
 
-    const data: firestoreUser = {
+    const data: FirestoreUser = {
       userId: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -56,11 +60,11 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.userDetails != null;
+    return this.userDetailsObservable != null;
   }
   
   logout() {
-    this.userDetails = null;
+    this.userDetailsObservable = null;
     this.afa.auth.signOut()
   }
 }
