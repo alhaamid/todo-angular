@@ -21,6 +21,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NotesService } from './services/notes.service';
+import { NotesResolveService } from './services/notes-resolve.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFireStorageModule
   ],
   providers: [
-    GlobalsService, AuthService, AuthGuardService, AuthResolveService
+    GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService
   ],
   bootstrap: [AppComponent]
 })

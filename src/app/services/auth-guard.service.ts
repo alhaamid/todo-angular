@@ -1,7 +1,7 @@
 import { AngularFirestore } from 'angularfire2/firestore';
-import { GlobalsService, FirestoreUser } from './globals.service';
+import { GlobalsService } from './globals.service';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService, FirestoreUser } from './auth.service';
 import { Router, CanActivate } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class AuthGuardService {
   canActivate(): Promise<boolean> {
     return new Promise<boolean>((res, rej) => {
       if (this.authService.isLoggedIn()) {
-        if (this.gs.DEBUG)console.log("good to go.");
+        if (this.gs.DEBUG) console.log("good to go.");
         res(true);
       } else {
         /* The following block makes sure that if the user didn't log out, 

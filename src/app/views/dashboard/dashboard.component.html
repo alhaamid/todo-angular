@@ -2,28 +2,28 @@
   <h2>Add a Note</h2>
   <div class="noteForm">
 
-    <input type="text" [(ngModel)]="newTitle" name="newTitle" placeholder="Title.." ><br>
+    <input type="text" [(ngModel)]="this.ns.newTitle" name="title" placeholder="Title.." ><br>
 
     <div class="content">
 
-      <button (click)=addTask()>Add task</button>
+      <button (click)=this.ns.addTask()>Add task</button>
 
-      <div *ngFor="let newToDo of newToDos; index as i;">
-        <input type="text" [(ngModel)]="newToDo.task" name="newToDo.task" placeholder="Task..">
-        <input type="checkbox" [(ngModel)]="newToDo.done" name="newToDo.done" (change)=print()>
+      <div *ngFor="let newToDo of this.ns.newToDos;">
+        <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="Task..">
+        <input type="checkbox" [(ngModel)]="newToDo.done" name="done">
       </div>
 
     </div>
 
-    <input type="submit" value="Add this note" (click)=addNote()>
+    <input type="submit" value="Add this note" (click)=this.ns.addNote()>
 
   </div>
 </div>
 
 
 <h2>Your Notes</h2>
-<div *ngFor="let note of notes | async">
-  <h2> Title: {{ note.title }} </h2>
+<div *ngFor="let note of this.ns.allNotes">
+  <h3> Title: {{ note.title }} </h3>
   <div class="content">
     <div *ngFor="let todo of note.content.toDos; index as i;">
       
@@ -32,5 +32,5 @@
     </div>
 
   </div>
-  <button (click)="deleteNote(note.noteId)">Delete</button>
+  <button (click)="this.ns.deleteNote(note.noteId)">Delete</button>
 </div>

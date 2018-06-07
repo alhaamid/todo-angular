@@ -1,4 +1,4 @@
-import { GlobalsService, FirestoreUser } from './globals.service';
+import { GlobalsService } from './globals.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -67,6 +67,13 @@ export class AuthService {
     this.userDetailsObservable = null;
     this.afa.auth.signOut()
   }
+}
+
+export interface FirestoreUser {
+  userId: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
 }
 
 /** old version of signInWithGoogle */
