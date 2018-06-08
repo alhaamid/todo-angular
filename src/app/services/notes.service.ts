@@ -13,33 +13,25 @@ export class NotesService {
 
   allNotes: Note[] = null;
   newNote: Note = null;
-
-  // newTitle: string;
-  // newToDos: any[];
-
-  /**
-   * newNoteTasks should be an array such that each todo checkbox and input is bound to done and task respectively.
-   * id's should be assigned to each checkbox, task and deleteTask button so array can be spliced accordingly.
-   */
+  
+  nextNoteIndex: number = 0;
 
   constructor(private gs: GlobalsService, private as: AuthService, public afs: AngularFirestore) { 
     this.notesCollection = this.afs.collection<Note>(`${this.gs.NOTES_COLLECTION}`, ref => {
-      return ref.where('creatorId', '==', this.as.userDetails.userId).orderBy('createdAt', 'desc');
+      return ref.where('creatorId', '==', this.as.userDetails.userId).orderBy('noteIndex', 'desc');
     });
-    // change ^ so only notes of current user are extracted
     this.notesObservable = this.notesCollection.valueChanges();
     this.notesObservable.subscribe(res => {
-      this.allNotes = res; // do any sorting here.
-      // console.log(res);
+      this.allNotes = res;
+      this.allNotes.map(note => this.nextNoteIndex = Math.max(this.nextNoteIndex, note.noteIndex));
+      this.nextNoteIndex = this.nextNoteIndex + 1;
     })
 
-    this.renewNote(); // should also be called in the dashboard constructor
+    this.renewNote();
   }
 
   renewNote() {
-    this.newNote = this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '', null);
-    // this.newTitle = '';
-    // this.newToDos = [{done: false, task: '', lastDoneBy: ''}];
+    this.newNote = this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
   }
 
   addToDo(noteIndex_: number, toDoIndex_: number) {
@@ -48,7 +40,6 @@ export class NotesService {
   }
 
   addNewToDo(toDoIndex_: number) {
-    // this.newNote.content.toDos.push(this.getToDo(false, '', ''));
     this.newNote.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
   }
 
@@ -63,16 +54,14 @@ export class NotesService {
       }
     });
 
-    this.newNote.createdAt = new Date();
+    this.newNote.addedAt = new Date();
+    this.newNote.noteIndex = this.getNextNoteIndex();
 
     this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(this.newNote.noteId).set(this.newNote);
     this.renewNote();
-
-    // this.afs.collection(`${this.gs.NOTES_COLLECTION}`).add({'title': this.title, 'content': this.content}); // auto-generates an Id
   }
 
   updateNote(noteId_: string) {
-    // console.log(this.allNotes.filter(note => note.noteId==noteId_));
     var matchingNotes = this.allNotes.filter(note => note.noteId==noteId_);
     if (matchingNotes.length === 1) {
       this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(noteId_).set(matchingNotes[0]);
@@ -94,10 +83,6 @@ export class NotesService {
     this.afs.doc(`notes/${noteId_}`).delete();
   }
 
-  getCopy(obj: any) {
-    return console.log(JSON.parse(JSON.stringify(obj)));
-  }
-
   print(...i) {
     console.log(...i);
   }
@@ -106,7 +91,11 @@ export class NotesService {
     return this.afs.createId();
   }
 
-  getNote(creatorId_: string, title_: string, content_: Content, collaborators_: string[], reminderId_: string, createdAt_: Date) {
+  getNextNoteIndex() {
+    return this.nextNoteIndex;
+  }
+
+  getNote(creatorId_: string, title_: string, content_: Content, collaborators_: string[], reminderId_: string) {
     const note: Note = {
       noteId: this.getUniqueId(),
       creatorId: creatorId_,
@@ -114,7 +103,8 @@ export class NotesService {
       content: content_,
       collaborators: collaborators_,
       reminderId: reminderId_,
-      createdAt: createdAt_
+      addedAt: null, // this need to be updated when adding the note
+      noteIndex: null // this need to be updated when adding the note
     }
     return note;
   }
@@ -151,7 +141,8 @@ interface Note {
   collaborators: string[];
   reminderId: string;
   
-  createdAt: Date; // for ordering. could add a node index
+  addedAt: Date; // for ordering. could add a note index
+  noteIndex: number;
 }
 
 interface Content {
@@ -165,3 +156,5 @@ interface ToDo {
   task: string;
   lastDoneBy: string; // userId of the latest user who did this task.
 }
+
+// this.afs.collection(`${this.gs.NOTES_COLLECTION}`).add({'title': this.title, 'content': this.content}); // auto-generates an Id

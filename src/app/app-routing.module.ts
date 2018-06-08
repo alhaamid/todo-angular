@@ -9,6 +9,7 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { RemindersComponent } from './views/reminders/reminders.component';
 import { NotesResolveService } from './services/notes-resolve.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 class RoutesClass {
   public routes: Routes;
