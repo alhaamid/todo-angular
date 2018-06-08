@@ -16,6 +16,9 @@ export class GlobalsService {
   public SETTINGS_PAGE = new pageDetails('settings', '/settings', ['settings']);
   public YOUR_ACCOUNT_PAGE = new pageDetails('your-account', '/your-account', ['your-account']);
 
+  public USERS_COLLECTION: string = 'users';
+  public NOTES_COLLECTION: string = 'notes';
+
   public DEBUG: boolean = false;
 
   constructor() { }

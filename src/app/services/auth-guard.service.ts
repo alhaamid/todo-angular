@@ -11,22 +11,21 @@ export class AuthGuardService {
   constructor(private router: Router, private authService: AuthService, private gs: GlobalsService, private afs: AngularFirestore) { }
 
   canActivate(): Promise<boolean> {
-    return new Promise<boolean>((res, rej) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (this.authService.isLoggedIn()) {
         if (this.gs.DEBUG) console.log("good to go.");
-        res(true);
+        resolve(true);
       } else {
         /* The following block makes sure that if the user didn't log out, 
         then the user won't be redirected to the login page and would be logged in behind the scene. */
         this.authService.authState.subscribe( (user) => {
           if (user) {
-            this.authService.userDetailsObservable = this.afs.doc<FirestoreUser>(`users/${user.uid}`).valueChanges();
-            this.authService.userDetailsObservable.subscribe(res => {
-              this.authService.userDetails = res;
+            this.authService.userDetailsObservable = this.afs.doc<FirestoreUser>(`${this.gs.USERS_COLLECTION}/${user.uid}`).valueChanges();
+            this.authService.userDetailsObservable.subscribe(response => {
+              this.authService.userDetails = response;
+              if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn(), "for", this.router.url);
+              resolve(true);
             })
-
-            if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn(), "for", this.router.url);
-            res(true);
           } else {
             this.authService.userDetailsObservable = null;
             if (this.gs.DEBUG) console.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
@@ -34,7 +33,7 @@ export class AuthGuardService {
             if (!(this.router.url === this.gs.LOGIN_PAGE.ROUTE)) {
               this.router.navigate(this.gs.LOGIN_PAGE.NAV);
             }
-            res(false);
+            resolve(false);
           }
         });
       }

@@ -2,35 +2,39 @@
   <h2>Add a Note</h2>
   <div class="noteForm">
 
-    <input type="text" [(ngModel)]="this.ns.newTitle" name="title" placeholder="Title.." ><br>
+    <input type="text" [(ngModel)]="this.ns.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"><br>
 
     <div class="content">
+      <div *ngFor="let newToDo of this.ns.newNote.content.toDos; index as i">
 
-      <button (click)=this.ns.addTask()>Add task</button>
-
-      <div *ngFor="let newToDo of this.ns.newToDos;">
-        <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="Task..">
         <input type="checkbox" [(ngModel)]="newToDo.done" name="done">
-      </div>
+        <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="{{this.taskPlaceholder}}">
+        <span class="glyphicon glyphicon-plus" (click)="this.ns.addNewToDo(i+1)"></span>
+        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteNewToDo(i)"></span>
 
+      </div>
     </div>
 
-    <input type="submit" value="Add this note" (click)=this.ns.addNote()>
+    <input type="submit" value="Add this note" (click)="this.ns.addNewNote()">
 
   </div>
 </div>
 
 
 <h2>Your Notes</h2>
-<div *ngFor="let note of this.ns.allNotes">
+<div *ngFor="let note of this.ns.allNotes; index as noteIndex">
   <h3> Title: {{ note.title }} </h3>
   <div class="content">
-    <div *ngFor="let todo of note.content.toDos; index as i;">
+    <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
       
-      <input type="text" [(ngModel)]="todo.task" name="todo.task">
-      <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" >
+      <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.updateNote(note.noteId);">
+      <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.updateNote(note.noteId)"  placeholder="{{this.taskPlaceholder}}">
+      <span class="glyphicon glyphicon-plus" (click)="this.ns.addToDo(noteIndex, toDoIndex+1)"></span>
+      <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteToDo(noteIndex, toDoIndex)"></span>
+
     </div>
 
   </div>
+  <!-- <button (click)="this.ns.updateNote(note.noteId)">Update</button> -->
   <button (click)="this.ns.deleteNote(note.noteId)">Delete</button>
 </div>

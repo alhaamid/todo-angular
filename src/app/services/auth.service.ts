@@ -21,7 +21,7 @@ export class AuthService {
     this.authState = afa.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.userDetailsObservable = this.afs.doc<FirestoreUser>(`users/${user.uid}`).valueChanges();
+        this.userDetailsObservable = this.afs.doc<FirestoreUser>(`${this.gs.USERS_COLLECTION}/${user.uid}`).valueChanges();
         this.userDetailsObservable.subscribe(res => {
           this.userDetails = res;
         });
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   updateUserData(user) {
-    const userRef: AngularFirestoreDocument<FirestoreUser> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<FirestoreUser> = this.afs.doc(`${this.gs.USERS_COLLECTION}/${user.uid}`);
 
     const data: FirestoreUser = {
       userId: user.uid,
@@ -65,7 +65,8 @@ export class AuthService {
   
   logout() {
     this.userDetailsObservable = null;
-    this.afa.auth.signOut()
+    this.userDetails = null;
+    this.afa.auth.signOut();;
   }
 }
 
