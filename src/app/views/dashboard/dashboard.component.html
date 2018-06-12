@@ -1,42 +1,43 @@
 
+
+
 <div class="addNoteSection" style="text-align:left">
   <h2>Add a Note</h2>
   <div class="noteForm">
 
-    <input type="text" [(ngModel)]="this.ns.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"><br>
+    <input type="text" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"><br>
 
     <div class="content">
-      <div *ngFor="let newToDo of this.ns.newNote.content.toDos; index as i">
+      <div *ngFor="let newToDo of this.newNote.content.toDos; index as i">
 
         <input type="checkbox" [(ngModel)]="newToDo.done" name="done">
         <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="{{this.taskPlaceholder}}">
-        <span class="glyphicon glyphicon-plus" (click)="this.ns.addNewNoteToDo(i+1)"></span>
-        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteNewNoteToDo(i)"></span>
+        <span class="glyphicon glyphicon-plus" (click)="this.ns.addNewNoteToDo(this.newNote, i+1)"></span>
+        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteNewNoteToDo(this.newNote, i)"></span>
 
       </div>
     </div>
 
-    <input type="submit" value="Add this note" (click)="this.ns.addNewNote()">
+    <input type="submit" value="Add this note" (click)="this.ns.addNewNote(this.newNote)">
 
   </div>
 </div>
 
 <div style="text-align:left" class="yourNotesSection">
   <h2>Your Notes</h2>
-  <div *ngFor="let note of this.ns.allNotes; index as noteIndex">
+  <div *ngFor="let note of this.ns.allNotes;">
     <h3> Title: {{ note.title }} </h3>
     <div class="content">
       <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
         
-        <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.updateNote(note.noteId);">
-        <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.updateNote(note.noteId)"  placeholder="{{this.taskPlaceholder}}">
-        <span class="glyphicon glyphicon-plus" (click)="this.ns.addToDo(noteIndex, toDoIndex+1)"></span>
-        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteToDo(noteIndex, toDoIndex)"></span>
+        <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.setNote(note);">
+        <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}">
+        <span class="glyphicon glyphicon-plus" (click)="this.ns.addToDo(note, toDoIndex+1)"></span>
+        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteToDo(note, toDoIndex)"></span>
 
       </div>
 
     </div>
-    <button (click)="this.ns.deleteNote(note.noteId)">Delete</button>
-    <p>__________________________</p>
+    <button (click)="this.ns.deleteNote(note)">Delete</button>
   </div>
 </div>

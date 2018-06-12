@@ -1,10 +1,8 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { GlobalsService } from '../../services/globals.service';
-import { Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { NotesService } from '../../services/notes.service';
+import { NotesService, Note } from '../../services/notes.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +17,11 @@ export class DashboardComponent implements OnInit {
   titlePlaceholder: string = 'Title..';
   taskPlaceholder: string = 'Task..';
 
-  constructor(private ns: NotesService) {
+  rForm: FormGroup;
+  newNote: Note = null;
+
+  constructor(private ns: NotesService, private fb: FormBuilder) {
+    this.newNote = this.ns.getEmptyNote();
   }
 
   ngOnInit() {}

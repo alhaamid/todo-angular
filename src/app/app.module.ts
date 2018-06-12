@@ -37,8 +37,8 @@ import { NotesResolveService } from './services/notes-resolve.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    FormsModule, // for ngModel stuff
+    ReactiveFormsModule, // for reactive forms
     AngularFireModule.initializeApp(environment.firebase, 'app-name-in-module.ts'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

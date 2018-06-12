@@ -12,9 +12,7 @@ export class NotesService {
   notesCollection: AngularFirestoreCollection<Note> = null;
   notesObservable: Observable<Note[]> = null;
 
-  allNotes: Note[] = null;
-  newNote: Note = null;
-  
+  allNotes: Note[] = null;  
   nextNoteIndex: number = 0;
 
   constructor(private gs: GlobalsService, private as: AuthService, public afs: AngularFirestore) { 
@@ -31,61 +29,56 @@ export class NotesService {
       });
       this.nextNoteIndex = this.nextNoteIndex + 1;
     })
-
-    this.renewNote();
   }
 
-  renewNote() {
-    this.newNote = this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
+  // New note related
+  getEmptyNote(): Note {
+    return this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
   }
 
-  addToDo(noteIndex_: number, toDoIndex_: number) {
-    this.allNotes[noteIndex_].content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
-    this.updateNote(this.allNotes[noteIndex_].noteId); // updating note after changing it
+  addNewNoteToDo(note_: Note, toDoIndex_: number) {
+    note_.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
   }
 
-  addNewNoteToDo(toDoIndex_: number) {
-    this.newNote.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
+  addNewNote(note_: Note) {
+    note_.addedAt = firebase.firestore.FieldValue.serverTimestamp();
+    note_.noteIndex = this.getNextNoteIndex();
+
+    this.setNote(note_);
+    note_ = this.getEmptyNote();
   }
 
-  addNewNote() {
-    var toDos = this.newNote.content.toDos;
+  deleteNewNoteToDo(note_: Note, toDoIndex_: number) {
+    note_.content.toDos.splice(toDoIndex_, 1);
+  }
 
-    this.newNote.content.toDos = toDos.map(obj => {
+  // Existing notes related
+  addToDo(note_: Note, toDoIndex_: number) {
+    note_.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
+    this.setNote(note_);
+  }
+
+  deleteToDo(note_: Note, toDoIndex_: number) {
+    note_.content.toDos.splice(toDoIndex_, 1);
+    this.setNote(note_);
+  }
+
+  setNote(note_: Note) {
+    this.updateLastDones(note_);
+    this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(note_.noteId).set(note_);
+  }
+
+  deleteNote(note_: Note) {
+    this.afs.doc(`${this.gs.NOTES_COLLECTION}/${note_.noteId}`).delete();
+  }
+
+  // Utilities
+  updateLastDones(note_: Note) {
+    note_.content.toDos.map(obj => {
       if (obj.done) {
-        return this.getToDo(obj.done, obj.task, this.as.userDetails.userId);
-      } else {
-        return this.getToDo(obj.done, obj.task, '');
+        obj.lastDoneBy = this.as.userDetails.userId;
       }
     });
-
-    this.newNote.addedAt = firebase.firestore.FieldValue.serverTimestamp();
-    this.newNote.noteIndex = this.getNextNoteIndex();
-
-    this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(this.newNote.noteId).set(this.newNote);
-    this.renewNote();
-  }
-
-  updateNote(noteId_: string) {
-    var matchingNotes = this.allNotes.filter(note => note.noteId==noteId_);
-    if (matchingNotes.length === 1) {
-      this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(noteId_).set(matchingNotes[0]);
-    } else {
-      if (this.gs.DEBUG) console.log("Matching notes have a length of", matchingNotes.length, "which should be 1");
-    }
-  }
-
-  deleteToDo(noteIndex_: number, toDoIndex_: number) {
-    this.allNotes[noteIndex_].content.toDos.splice(toDoIndex_, 1);
-    this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(this.allNotes[noteIndex_].noteId).set(this.allNotes[noteIndex_]);
-  }
-
-  deleteNewNoteToDo(toDoIndex_: number) {
-    this.newNote.content.toDos.splice(toDoIndex_, 1);
-  }
-
-  deleteNote(noteId_: string) {
-    this.afs.doc(`${this.gs.NOTES_COLLECTION}/${noteId_}`).delete();
   }
 
   print(...i) {
@@ -133,7 +126,7 @@ export class NotesService {
   }
 }
 
-interface Note {
+export interface Note {
   /**
    * creatorId: userId of creater
    * collaborators: array of userIds of all users with whom the creater has shared these notes.
@@ -150,22 +143,14 @@ interface Note {
   noteIndex: number;
 }
 
-interface Content {
+export interface Content {
   contentId: string;
   toDos: ToDo[];
 }
 
-interface ToDo {
+export interface ToDo {
   toDoId: string;
   done: boolean;
   task: string;
   lastDoneBy: string; // userId of the latest user who did this task.
 }
-
-// this.afs.collection(`${this.gs.NOTES_COLLECTION}`).add({'title': this.title, 'content': this.content}); // auto-generates an Id
-/**
- * M~F
- * E
- * A~
- * N
- */
