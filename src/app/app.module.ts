@@ -38,7 +38,7 @@ import { NotesResolveService } from './services/notes-resolve.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule, // for ngModel stuff
-    ReactiveFormsModule, // for reactive forms
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), // disabled warning of using ngModel and formControlName together.
     AngularFireModule.initializeApp(environment.firebase, 'app-name-in-module.ts'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

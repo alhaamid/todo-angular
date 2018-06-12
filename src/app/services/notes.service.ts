@@ -31,36 +31,21 @@ export class NotesService {
     })
   }
 
-  // New note related
-  getEmptyNote(): Note {
-    return this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
-  }
-
-  addNewNoteToDo(note_: Note, toDoIndex_: number) {
+  addToDo(note_: Note, toDoIndex_: number, set_: boolean) {
     note_.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
+    if (set_) {
+      this.setNote(note_);
+    }
   }
 
-  addNewNote(note_: Note) {
+  addNote(note_: Note) {
     note_.addedAt = firebase.firestore.FieldValue.serverTimestamp();
     note_.noteIndex = this.getNextNoteIndex();
 
     this.setNote(note_);
-    note_ = this.getEmptyNote();
-  }
-
-  deleteNewNoteToDo(note_: Note, toDoIndex_: number) {
-    note_.content.toDos.splice(toDoIndex_, 1);
-  }
-
-  // Existing notes related
-  addToDo(note_: Note, toDoIndex_: number) {
-    note_.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
-    this.setNote(note_);
-  }
-
-  deleteToDo(note_: Note, toDoIndex_: number) {
-    note_.content.toDos.splice(toDoIndex_, 1);
-    this.setNote(note_);
+    // console.log(note_);
+    // note_ = this.getEmptyNote();
+    // console.log(note_);
   }
 
   setNote(note_: Note) {
@@ -68,11 +53,22 @@ export class NotesService {
     this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(note_.noteId).set(note_);
   }
 
+  deleteToDo(note_: Note, toDoIndex_: number, set_: boolean) {
+    note_.content.toDos.splice(toDoIndex_, 1);
+    if (set_) {
+      this.setNote(note_);
+    }
+  }
+
   deleteNote(note_: Note) {
     this.afs.doc(`${this.gs.NOTES_COLLECTION}/${note_.noteId}`).delete();
   }
 
   // Utilities
+  getEmptyNote(): Note {
+    return this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
+  }
+
   updateLastDones(note_: Note) {
     note_.content.toDos.map(obj => {
       if (obj.done) {

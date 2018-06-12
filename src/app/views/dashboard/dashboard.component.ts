@@ -22,6 +22,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(private ns: NotesService, private fb: FormBuilder) {
     this.newNote = this.ns.getEmptyNote();
+
+    this.rForm = fb.group({
+      'titleValidation': [null, Validators.required],
+    })
+  }
+
+  addNote() {
+    this.ns.addNote(this.newNote);
+    this.newNote = this.ns.getEmptyNote();
+    this.rForm.reset();
   }
 
   ngOnInit() {}
