@@ -69,7 +69,7 @@ export class NotesService {
     return this.getNote(this.as.userDetails.userId, '', this.getContent([this.getToDo(false, '', '')]), [], '');
   }
 
-  updateLastDones(note_: Note) {
+  private updateLastDones(note_: Note) {
     note_.content.toDos.map(obj => {
       if (obj.done) {
         obj.lastDoneBy = this.as.userDetails.userId;
@@ -77,19 +77,19 @@ export class NotesService {
     });
   }
 
-  print(...i) {
+  private print(...i) {
     console.log(...i);
   }
 
-  getUniqueId() {
+  private getUniqueId() {
     return this.afs.createId();
   }
 
-  getNextNoteIndex() {
+  private getNextNoteIndex() {
     return this.nextNoteIndex;
   }
 
-  getNote(creatorId_: string, title_: string, content_: Content, collaborators_: string[], reminderId_: string) {
+  private getNote(creatorId_: string, title_: string, content_: Content, collaborators_: string[], reminderId_: string) {
     const note: Note = {
       noteId: this.getUniqueId(),
       creatorId: creatorId_,
@@ -103,7 +103,7 @@ export class NotesService {
     return note;
   }
 
-  getContent(toDos_: ToDo[]) {
+  private getContent(toDos_: ToDo[]) {
     const content: Content = {
       contentId: this.getUniqueId(),
       toDos: toDos_
@@ -111,7 +111,7 @@ export class NotesService {
     return content;
   }
 
-  getToDo(done_: boolean, task_: string, lastDoneBy_: string) {
+  private getToDo(done_: boolean, task_: string, lastDoneBy_: string) {
     const toDo: ToDo = {
       toDoId: this.getUniqueId(),
       done: done_,
