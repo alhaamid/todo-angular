@@ -1,3 +1,4 @@
+
 <div class="addNoteSection" style="text-align:left">
   <h2>Add a Note</h2>
   <div class="noteForm">
@@ -9,8 +10,8 @@
 
         <input type="checkbox" [(ngModel)]="newToDo.done" name="done">
         <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="{{this.taskPlaceholder}}">
-        <span class="glyphicon glyphicon-plus" (click)="this.ns.addNewToDo(i+1)"></span>
-        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteNewToDo(i)"></span>
+        <span class="glyphicon glyphicon-plus" (click)="this.ns.addNewNoteToDo(i+1)"></span>
+        <span class="glyphicon glyphicon-trash" (click)="this.ns.deleteNewNoteToDo(i)"></span>
 
       </div>
     </div>
@@ -35,7 +36,6 @@
       </div>
 
     </div>
-    <!-- <button (click)="this.ns.updateNote(note.noteId)">Update</button> -->
     <button (click)="this.ns.deleteNote(note.noteId)">Delete</button>
     <p>__________________________</p>
   </div>

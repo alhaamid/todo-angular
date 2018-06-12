@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { GlobalsService } from './globals.service';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,11 @@ export class NotesService {
     this.notesObservable = this.notesCollection.valueChanges();
     this.notesObservable.subscribe(res => {
       this.allNotes = res;
-      this.allNotes.map(note => this.nextNoteIndex = Math.max(this.nextNoteIndex, note.noteIndex));
+
+      this.nextNoteIndex = 0;
+      this.allNotes.map(note => {
+        this.nextNoteIndex = Math.max(this.nextNoteIndex, note.noteIndex)
+      });
       this.nextNoteIndex = this.nextNoteIndex + 1;
     })
 
@@ -36,10 +41,10 @@ export class NotesService {
 
   addToDo(noteIndex_: number, toDoIndex_: number) {
     this.allNotes[noteIndex_].content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
-    this.updateNote(this.allNotes[noteIndex_].noteId);
+    this.updateNote(this.allNotes[noteIndex_].noteId); // updating note after changing it
   }
 
-  addNewToDo(toDoIndex_: number) {
+  addNewNoteToDo(toDoIndex_: number) {
     this.newNote.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
   }
 
@@ -54,7 +59,7 @@ export class NotesService {
       }
     });
 
-    this.newNote.addedAt = new Date();
+    this.newNote.addedAt = firebase.firestore.FieldValue.serverTimestamp();
     this.newNote.noteIndex = this.getNextNoteIndex();
 
     this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(this.newNote.noteId).set(this.newNote);
@@ -75,12 +80,12 @@ export class NotesService {
     this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(this.allNotes[noteIndex_].noteId).set(this.allNotes[noteIndex_]);
   }
 
-  deleteNewToDo(toDoIndex_: number) {
+  deleteNewNoteToDo(toDoIndex_: number) {
     this.newNote.content.toDos.splice(toDoIndex_, 1);
   }
 
   deleteNote(noteId_: string) {
-    this.afs.doc(`notes/${noteId_}`).delete();
+    this.afs.doc(`${this.gs.NOTES_COLLECTION}/${noteId_}`).delete();
   }
 
   print(...i) {
@@ -141,7 +146,7 @@ interface Note {
   collaborators: string[];
   reminderId: string;
   
-  addedAt: Date; // for ordering. could add a note index
+  addedAt: any; // for ordering. could add a note index
   noteIndex: number;
 }
 
@@ -158,3 +163,9 @@ interface ToDo {
 }
 
 // this.afs.collection(`${this.gs.NOTES_COLLECTION}`).add({'title': this.title, 'content': this.content}); // auto-generates an Id
+/**
+ * M~F
+ * E
+ * A~
+ * N
+ */

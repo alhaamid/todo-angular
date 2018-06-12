@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 
-/**
- * normalize all calls to users/ and notes collection
- */
-
 @Injectable({
   providedIn: 'root'
 })
