@@ -25,9 +25,9 @@
   </form>
 </div>
 
-<div class="yourNotesSection" style="text-align:left">
+<div *ngIf="this.ns.allNotes" class="yourNotesSection" style="text-align:left" [@note]="this.ns.allNotes.length">
   <h2>Your Notes</h2>
-  <div *ngFor="let note of this.ns.allNotes;">
+  <div *ngFor="let note of this.ns.allNotes; index as noteIndex">
     <h3> Title: {{ note.title }} </h3>
     <div class="content">
       <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
