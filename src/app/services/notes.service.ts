@@ -16,19 +16,12 @@ export class NotesService {
   nextNoteIndex: number = 0;
 
   constructor(private gs: GlobalsService, private as: AuthService, public afs: AngularFirestore) { 
+    if (gs.DEBUG) console.log("constructor of notes service called");
+
     this.notesCollection = this.afs.collection<Note>(`${this.gs.NOTES_COLLECTION}`, ref => {
       return ref.where('creatorId', '==', this.as.userDetails.userId).orderBy('noteIndex', 'desc');
     });
     this.notesObservable = this.notesCollection.valueChanges();
-    this.notesObservable.subscribe(res => {
-      this.allNotes = res;
-
-      this.nextNoteIndex = 0;
-      this.allNotes.map(note => {
-        this.nextNoteIndex = Math.max(this.nextNoteIndex, note.noteIndex)
-      });
-      this.nextNoteIndex = this.nextNoteIndex + 1;
-    })
   }
 
   addToDo(note_: Note, toDoIndex_: number, set_: boolean) {
@@ -36,16 +29,6 @@ export class NotesService {
     if (set_) {
       this.setNote(note_);
     }
-  }
-
-  addNote(note_: Note) {
-    note_.addedAt = firebase.firestore.FieldValue.serverTimestamp();
-    note_.noteIndex = this.getNextNoteIndex();
-
-    this.setNote(note_);
-    // console.log(note_);
-    // note_ = this.getEmptyNote();
-    // console.log(note_);
   }
 
   setNote(note_: Note) {
@@ -97,7 +80,6 @@ export class NotesService {
       content: content_,
       collaborators: collaborators_,
       reminderId: reminderId_,
-      addedAt: null, // this need to be updated when adding the note
       noteIndex: null // this need to be updated when adding the note
     }
     return note;
@@ -135,7 +117,6 @@ export interface Note {
   collaborators: string[];
   reminderId: string;
   
-  addedAt: any; // for ordering. could add a note index
   noteIndex: number;
 }
 

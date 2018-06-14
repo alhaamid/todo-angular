@@ -17,7 +17,7 @@ export class GlobalsService {
   public USERS_COLLECTION: string = 'users';
   public NOTES_COLLECTION: string = 'notes';
   
-  public DEBUG: boolean = false;
+  public DEBUG: boolean = true;
 
   constructor() { }
 }
