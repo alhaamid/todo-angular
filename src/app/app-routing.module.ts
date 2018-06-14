@@ -8,6 +8,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { LoginComponent } from './views/login/login.component';
 import { RemindersComponent } from './views/reminders/reminders.component';
+import { NotesResolveService } from './services/notes-resolve.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 class RoutesClass {
   public routes: Routes;
@@ -19,7 +21,7 @@ class RoutesClass {
         path: gs.LANDING_PAGE.STR,
         component: DashboardComponent,
         canActivate: [AuthGuardService],
-        // resolve: [AuthResolveService]
+        resolve: [NotesResolveService]
       },
       {
         path: gs.REMINDERS_PAGE.STR,
@@ -43,6 +45,15 @@ class RoutesClass {
     ];
   }
 }
+
+@NgModule({
+  imports: [RouterModule.forRoot(new RoutesClass(new GlobalsService()).routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
 
 // const routes: Routes = [
 //   // replace all strings here with reference from globals service
@@ -72,9 +83,3 @@ class RoutesClass {
 //     canActivate: [AuthGuardService],
 //   }
 // ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(new RoutesClass(new GlobalsService()).routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

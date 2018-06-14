@@ -1,4 +1,4 @@
-import { GlobalsService, firestoreUserDetails } from './globals.service';
+import { GlobalsService } from './globals.service';
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 
@@ -14,15 +14,19 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
   public authState: Observable<firebase.User>;
-  public userDetails: Observable<firestoreUserDetails> = null;
+  public userDetailsObservable: Observable<FirestoreUser> = null;
+  public userDetails: FirestoreUser = null;
 
   constructor(private afa: AngularFireAuth, private afs: AngularFirestore, private router: Router, private gs: GlobalsService) {
     this.authState = afa.authState;
     this.authState.subscribe(user => {
       if (user) {
-        this.userDetails = this.afs.doc<firestoreUserDetails>(`users/${user.uid}`).valueChanges();
+        this.userDetailsObservable = this.afs.doc<FirestoreUser>(`${this.gs.USERS_COLLECTION}/${user.uid}`).valueChanges();
+        this.userDetailsObservable.subscribe(res => {
+          this.userDetails = res;
+        });
       } else {
-        this.userDetails = null;
+        this.userDetailsObservable = null;
       }
     });
   }
@@ -43,9 +47,9 @@ export class AuthService {
   }
 
   updateUserData(user) {
-    const userRef: AngularFirestoreDocument<firestoreUserDetails> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<FirestoreUser> = this.afs.doc(`${this.gs.USERS_COLLECTION}/${user.uid}`);
 
-    const data: firestoreUserDetails = {
+    const data: FirestoreUser = {
       userId: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -56,13 +60,21 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.userDetails != null;
+    return this.userDetailsObservable != null;
   }
   
   logout() {
+    this.userDetailsObservable = null;
     this.userDetails = null;
-    this.afa.auth.signOut()
+    this.afa.auth.signOut();;
   }
+}
+
+export interface FirestoreUser {
+  userId: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
 }
 
 /** old version of signInWithGoogle */

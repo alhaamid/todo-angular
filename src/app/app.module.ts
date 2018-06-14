@@ -21,6 +21,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NotesService } from './services/notes.service';
+import { NotesResolveService } from './services/notes-resolve.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -35,16 +38,17 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
+    FormsModule, // for ngModel stuff
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}), // disabled warning of using ngModel and formControlName together.
     AngularFireModule.initializeApp(environment.firebase, 'app-name-in-module.ts'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    GlobalsService, AuthService, AuthGuardService, AuthResolveService
+    GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService
   ],
   bootstrap: [AppComponent]
 })
