@@ -10,26 +10,26 @@ import { Subscription } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   animations: [
-    trigger('note', [
-      transition('void <=> *', animate('1000ms ease-in', keyframes([
-        style({opacity: 0, transform: 'translateY(-20px)', offset: 0}),
-        style({opacity: .5, transform: 'translateY(-10px)', offset: 0.5}),
-        style({opacity: 1, transform: 'translateY(0px)', offset: 1}),
-      ]))),
-      transition('* => void', animate('1000ms ease-out', keyframes([
-        style({opacity: 1, transform: 'translateY(0px)', offset: 0}),
-        style({opacity: 0.5, transform: 'translateY(-10px)', offset: 0.5}),
-        style({opacity: 0, transform: 'translateY(-20px)', offset: 1}),
-      ])))
+    // trigger('note', [
+    //   transition('void <=> *', animate('1000ms ease-in', keyframes([
+    //     style({opacity: 0, transform: 'translateY(-20px)', offset: 0}),
+    //     style({opacity: .5, transform: 'translateY(-10px)', offset: 0.5}),
+    //     style({opacity: 1, transform: 'translateY(0px)', offset: 1}),
+    //   ]))),
+    //   transition('* => void', animate('1000ms ease-out', keyframes([
+    //     style({opacity: 1, transform: 'translateY(0px)', offset: 0}),
+    //     style({opacity: 0.5, transform: 'translateY(-10px)', offset: 0.5}),
+    //     style({opacity: 0, transform: 'translateY(-20px)', offset: 1}),
+    //   ])))
 
-      /**
-       * Usage: 
-       * <p [@note]='state' (click)="animatMe()"> I will animate </p>
-       * animateMe() {
-       *  this.state = (this.state === 'small' ? 'large' : 'small')
-       * }
-       */
-    ]),
+    //   /**
+    //    * Usage: 
+    //    * <p [@note]='state' (click)="animatMe()"> I will animate </p>
+    //    * animateMe() {
+    //    *  this.state = (this.state === 'small' ? 'large' : 'small')
+    //    * }
+    //    */
+    // ]),
     // trigger('note', [ // all is name of animation, array is where different animation specific functions will reside
     //   transition('* => *', [ // any state to any state
     //     query(':enter', style({opacity: 0}), {optional: true}), // assign opacity zero to any elementts that are entering

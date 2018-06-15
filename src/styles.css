@@ -2,7 +2,14 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
 body {
-    padding: 40px 80px 40px 80px;
+    padding: 40px 80px;
+    font-size: 20px;
+}
+
+button {
+    font-size: 18px;
+    border-radius: 1em;
+    background-color: khaki
 }
 
 /* a {

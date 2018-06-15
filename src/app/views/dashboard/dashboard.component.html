@@ -29,7 +29,7 @@
   <div class="yourNotesSection">
     <h2>Your Notes</h2>
     <div *ngFor="let note of this.allNotes; index as noteIndex ">
-      <div @note class="content">
+      <div class="content"> <!-- @note -->
         <h3> {{ note.title }} </h3>
         <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
           <div>
