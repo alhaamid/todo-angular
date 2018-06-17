@@ -4,11 +4,11 @@
   </div>
 
   <div id="navbar">
-    <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
-        <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><div class="linkWrapper">Your Account</div></a>
+    <div title="{{yourAccountTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+        <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><div class="linkWrapper"><i class="material-icons">account_box</i></div></a>
     </div>
-    <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
-      <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><div class="textWrapper">Reminders</div></a>
+    <div title="{{remindersTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+      <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><div class="linkWrapper"><i class="material-icons">schedule</i></div></a>
     </div>
   </div>
 </div>

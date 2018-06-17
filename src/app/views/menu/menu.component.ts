@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  remindersTitle: string = "Your Reminders";
+  yourAccountTitle: string = "Your Account Details";
 
   constructor(private gs: GlobalsService, private authService: AuthService) { }
 
