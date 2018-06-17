@@ -1,15 +1,19 @@
 <div id="header">
-  <div id="app-title">
+  <div id="appTitle">
     <h2><a routerLink="{{gs.LANDING_PAGE.ROUTE}}"> {{gs.APP_NAME}} </a></h2>
   </div>
 
   <div id="navbar">
-    <li>
-      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="{{gs.REMINDERS_PAGE.ROUTE}}">Reminders</a>
-    </li>
-    <li>
-      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}">Your Account</a>
-    </li>
+    <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+      <div class="linkWrapper">
+        <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}">Reminders</a>
+      </div>
+    </div>
+    <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+      <div class="linkWrapper">
+        <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}">Your Account</a>
+      </div>
+    </div>
   </div>
 </div>
 

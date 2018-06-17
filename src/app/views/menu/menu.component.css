@@ -3,13 +3,20 @@
     font-family: 'Open Sans';
 }
 
+a {
+    text-decoration-line: none;
+    color: white;
+    height: inherit;
+    width: inherit;
+}
+
 #header {
     width: 100%;
     height: auto;
     /* overflow: auto; */
 }
 
-#app-title {
+#appTitle {
 	float: left;
     width: 40%;
     height: 4em;
@@ -23,10 +30,9 @@
     padding-left: 4em;
 }
 
-#app-title h2 a {
-    text-decoration-line: none;
-    color: white;
+#appTitle h2 a {
     font-family: 'Roboto';
+    letter-spacing: 0.2em;
 }
 
 #navbar {
@@ -39,36 +45,38 @@
     /* display: table; */
 }
 
-#navbar li {
-    float: right;
-    display: inline;
-    /* width: fit-content; */
+.linkBox {
     height: inherit;
-    /* background-color: lightgreen; */
-
-    padding: 0 3em 0 0;
-}
-
-#navbar li a {
-    height: inherit;
+    width: fit-content;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 0.5em;
-    color: white;
-    text-decoration-line: none;
-    
-    transition: all 0.5s ease-in-out;
+    padding: 0.5em;
+    /* background-color: lightgreen; */
+
+    margin: 0 3em 0 0;
+    padding: 1em;
+    transition: all 0.3s ease-in-out;
 }
 
-#navbar li a:hover {
-    color: lightcoral;
+.linkBox:hover {
+    background-color: #13aff0;
+}
+
+.linkBox .linkWrapper {
+    height: fit-content;
+    width: fit-content;
+    /* background-color: lightgoldenrodyellow; */
+    transition: all 0.3s ease-in-out;
+}
+
+.linkBox:hover .linkWrapper {
     transform: scale(1.1);
 }
 
 .active {
     background-color: #13aff0;
-}
+} 
 
 .material-icons {
     font-family: 'Material Icons';
