@@ -34,7 +34,7 @@
     <div *ngIf="this.authService.isLoggedIn()" title="{{yourAccountTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox toRight">
       <a class="centerBoth" routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><i class="material-icons centerBoth">account_box</i></a>
     </div>
-    
+
     <div *ngIf="this.authService.isLoggedIn()" title="{{remindersTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox toRight">
       <a class="centerBoth" routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><i class="material-icons centerBoth">timer</i></a>
     </div>
@@ -44,8 +44,6 @@
 
   </div>
 </div>
-
-<!-- <i class="material-icons md-48">face</i> -->
 
 <!-- <div>
   <nav class="navbar navbar-default">
