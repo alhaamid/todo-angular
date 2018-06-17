@@ -5,6 +5,7 @@
 * {
     --header-bg-color: #01411c;
     --hover-bg-color: #13aff0;
+    --navbar-height: 4em;
 
     /* border: 1px solid black; */
     font-family: 'Open Sans';
@@ -12,7 +13,7 @@
 
 a {
     text-decoration-line: none;
-    color: white;
+    color: inherit;
     height: inherit;
     width: inherit;
 }
@@ -20,64 +21,19 @@ a {
 #header {
     width: 100%;
     height: auto;
-    /* overflow: auto; */
 }
 
 #appTitle {
-	float: left;
-    width: 40%;
-    height: 4em;
+	/* float: left; */
+    width: 20%;
+    height: var(--navbar-height);
     background-color: var(--header-bg-color);
     text-align: left;
     text-transform: uppercase;
-
-    /* display: inline-flex;
-    justify-content: left;
-    align-items: center; */
-
-    display: -moz-box;
-    -moz-box-pack: left;
-    -moz-box-align: center;
-
-    display: -webkit-box;
-    -webkit-box-pack: left;
-    -webkit-box-align: center;
-
-    padding-left: 4em;
+    color: white;
 }
 
-#appTitle h2 a {
-    font-family: 'Roboto';
-    letter-spacing: 0.2em;
-}
-
-#navbar {
-	float: right;
-	width: 60%;
-    background-color: var(--header-bg-color);
-    height: 4em;
-    text-align: right;
-    padding-right: 3em;
-    /* display: table; */
-}
-
-.linkBox {
-    float: right;
-    height: inherit;
-    width: fit-content;
-
-    /* background-color: lightgreen; */
-
-    margin: 0 1px 0 0;
-    transition: all 0.2s ease-in-out;
-}
-
-.linkBox a {
-    /* height: inherit;
-    width: inherit; */
-
-    padding: 1em;
-
+.centerBoth {
     display: -moz-box;
     -moz-box-pack: center;
     -moz-box-align: center;
@@ -85,8 +41,41 @@ a {
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
+}
 
-    /* background-color: lightblue; */
+#appTitle h1 {
+    width: fit-content;
+}
+
+#appTitle h1 a {
+    font-family: 'Roboto';
+    letter-spacing: 0.2em;
+}
+
+#navbar {
+	float: right;
+	width: 80%;
+    background-color: var(--header-bg-color);
+    height: var(--navbar-height);
+    text-align: right;
+}
+
+.linkBox {
+    /* float: right; */
+    height: inherit;
+    width: max-content;
+    color: white;
+
+    background-color: var(--header-bg-color);
+
+    margin-left: 1px;
+    transition: all 0.2s ease-in-out;
+}
+
+.linkBox a i {
+    width: fit-content;
+    margin: 0.5em 1em;
+    /* background-color: red; */
     transition: all 0.2s ease-in-out;
 }
 
@@ -94,20 +83,16 @@ a {
     background-color: var(--hover-bg-color);
 }
 
-.linkBox a .linkWrapper {
-    /* background-color: red; */
-    transition: all 0.2s ease-in-out;
+.linkBox:hover a i {
+    transform: scale(1.2);
 }
 
-.linkWrapper * {
-    margin: 10px;
-    /* display: inline-flex;
-    justify-content: left;
-    align-items: center;  */
+.toRight {
+    float: right;
 }
 
-.linkBox:hover a .linkWrapper {
-    transform: scale(1.1);
+.toLeft {
+    float: left;
 }
 
 .active {
@@ -131,7 +116,92 @@ a {
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
-} 
+}
+
+
+
+
+
+
+
+
+.dropdown {
+    /* background-color: red; */
+    position: relative;
+    display: inline-block;
+    height: var(--navbar-height);
+    /* float: right; */
+}
+
+.hoverBox {
+    float: right;
+    height: inherit;
+    width: max-content;
+    color: white;
+    /* background-color: blue; */
+    transition: all 0.2s ease-in-out;
+}
+
+.hoverBox i {
+    width: fit-content;
+    margin: 0.5em 1em;
+    /* background-color: red; */
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
+}
+
+.hoverBox:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.hoverBox:hover i {
+    transform: scale(1.2);
+}
+
+.dropdown:hover .hoverBox .dropdownCol {
+    display: block;
+}
+
+.dropdownCol {
+    display: none;
+    position: absolute;
+    background-color: lightgray;
+    width: inherit;
+    z-index: auto !important;
+}
+
+.dropdownRow {
+    width: inherit;
+    background: red;
+}
+
+.linkBox2 {
+    /* float: right; */
+    height: inherit;
+    width: max-content;
+    color: white;
+
+    background-color: var(--header-bg-color);
+
+    margin-left: 1px;
+    transition: all 0.2s ease-in-out;
+}
+
+.linkBox2 a i {
+    width: fit-content;
+    margin: 0.5em 1em;
+    /* background-color: red; */
+    transition: all 0.2s ease-in-out;
+    transform: scale(1);
+}
+
+.linkBox2:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.linkBox2:hover a i {
+    transform: scale(1.3);
+}
 
 /* display: inline-flex;
 align-items: center;

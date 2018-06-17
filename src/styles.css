@@ -8,6 +8,10 @@
     outline: none;
 }
 
+body {
+    /* background: lightseagreen; */
+}
+
 .container {
     width: 80%;
     margin: auto;
