@@ -1,4 +1,11 @@
+/* :root {
+    --headerBackground: #01411c;
+} */
+
 * {
+    --header-bg-color: #01411c;
+    --hover-bg-color: #13aff0;
+
     /* border: 1px solid black; */
     font-family: 'Open Sans';
 }
@@ -20,13 +27,22 @@ a {
 	float: left;
     width: 40%;
     height: 4em;
-    background-color: #01411c;
+    background-color: var(--header-bg-color);
     text-align: left;
     text-transform: uppercase;
 
-    display: inline-flex;
+    /* display: inline-flex;
     justify-content: left;
-    align-items: center;
+    align-items: center; */
+
+    display: -moz-box;
+    -moz-box-pack: left;
+    -moz-box-align: center;
+
+    display: -webkit-box;
+    -webkit-box-pack: left;
+    -webkit-box-align: center;
+
     padding-left: 4em;
 }
 
@@ -38,44 +54,64 @@ a {
 #navbar {
 	float: right;
 	width: 60%;
-    background-color: #01411c;
+    background-color: var(--header-bg-color);
     height: 4em;
     text-align: right;
-    padding-right: 2em;
+    padding-right: 1em;
     /* display: table; */
 }
 
 .linkBox {
+    float: right;
     height: inherit;
     width: fit-content;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5em;
+
     /* background-color: lightgreen; */
 
     margin: 0 3em 0 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.linkBox a {
+    /* height: inherit;
+    width: inherit; */
+
     padding: 1em;
-    transition: all 0.3s ease-in-out;
+
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    /* background-color: lightblue; */
+    transition: all 0.2s ease-in-out;
 }
 
 .linkBox:hover {
-    background-color: #13aff0;
+    background-color: var(--hover-bg-color);
 }
 
-.linkBox .linkWrapper {
-    height: fit-content;
-    width: fit-content;
-    /* background-color: lightgoldenrodyellow; */
-    transition: all 0.3s ease-in-out;
+.linkBox a .linkWrapper {
+    /* background-color: red; */
+    transition: all 0.2s ease-in-out;
 }
 
-.linkBox:hover .linkWrapper {
+.linkWrapper * {
+    padding: 10px;
+    /* display: inline-flex;
+    justify-content: left;
+    align-items: center;  */
+}
+
+.linkBox:hover a .linkWrapper {
     transform: scale(1.1);
 }
 
 .active {
-    background-color: #13aff0;
+    background-color: var(--hover-bg-color);
 } 
 
 .material-icons {
@@ -96,3 +132,15 @@ a {
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
 } 
+
+/* display: inline-flex;
+align-items: center;
+justify-content: right; */
+
+/* display: -moz-box;
+-moz-box-pack: center;
+-moz-box-align: center;
+
+display: -webkit-box;
+-webkit-box-pack: center;
+-webkit-box-align: center; */

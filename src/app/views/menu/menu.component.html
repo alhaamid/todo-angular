@@ -5,14 +5,10 @@
 
   <div id="navbar">
     <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
-      <div class="linkWrapper">
-        <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}">Reminders</a>
-      </div>
+        <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><div class="linkWrapper">Your Account</div></a>
     </div>
     <div routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
-      <div class="linkWrapper">
-        <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}">Your Account</a>
-      </div>
+      <a routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><div class="textWrapper">Reminders</div></a>
     </div>
   </div>
 </div>
