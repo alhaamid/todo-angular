@@ -1,4 +1,4 @@
-<div class="addNoteSection">
+<div class="container addNoteSection">
   <h2>Add a Note</h2>
   <form [formGroup]="rForm">
     <div>
@@ -26,7 +26,7 @@
 </div>
 
 <div *ngIf="this.allNotes">
-  <div class="yourNotesSection">
+  <div class="container yourNotesSection">
     <h2>Your Notes</h2>
     <div *ngFor="let note of this.allNotes; index as noteIndex ">
       <div class="content"> <!-- @note -->

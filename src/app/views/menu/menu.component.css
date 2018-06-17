@@ -1,0 +1,90 @@
+* {
+    /* border: 1px solid black; */
+    font-family: 'Open Sans';
+}
+
+#header {
+    width: 100%;
+    height: auto;
+    /* overflow: auto; */
+}
+
+#app-title {
+	float: left;
+    width: 40%;
+    height: 4em;
+    background-color: #01411c;
+    text-align: left;
+    text-transform: uppercase;
+
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 4em;
+}
+
+#app-title h2 a {
+    text-decoration-line: none;
+    color: white;
+    font-family: 'Roboto';
+}
+
+#navbar {
+	float: right;
+	width: 60%;
+    background-color: #01411c;
+    height: 4em;
+    text-align: right;
+    padding-right: 2em;
+    /* display: table; */
+}
+
+#navbar li {
+    float: right;
+    display: inline;
+    /* width: fit-content; */
+    height: inherit;
+    /* background-color: lightgreen; */
+
+    padding: 0 3em 0 0;
+}
+
+#navbar li a {
+    height: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5em;
+    color: white;
+    text-decoration-line: none;
+    
+    transition: all 0.5s ease-in-out;
+}
+
+#navbar li a:hover {
+    color: lightcoral;
+    transform: scale(1.1);
+}
+
+.active {
+    background-color: #13aff0;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+} 
