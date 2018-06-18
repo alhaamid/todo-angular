@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
     this.notesSub = this.ns.notesObservable.subscribe(res => {
       if (!(this.allNotes === res)) {
         this.allNotes = res;
-        if (gs.DEBUG) console.log("notes updated.", this.allNotes, res);
+        this.gs.log("notes updated.", this.allNotes, res);
       }
     })
 
@@ -110,7 +110,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnDestroy() {
     this.notesSub.unsubscribe();
-    if (this.gs.DEBUG) console.log("unsubscribed from notesObservable");
+    this.gs.log("unsubscribed from notesObservable");
   }
 
 }

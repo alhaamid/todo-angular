@@ -18,6 +18,10 @@ export class GlobalsService {
   public DEBUG: boolean = false;
 
   constructor() { }
+
+  public log(...a) {
+    if (this.DEBUG) console.log(...a);
+  }
 }
 
 class PageDetails {

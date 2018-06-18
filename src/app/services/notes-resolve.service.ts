@@ -12,13 +12,13 @@ export class NotesResolveService implements Resolve<any> {
   constructor(private ns: NotesService, private gs: GlobalsService) { }
 
   resolve(route: ActivatedRouteSnapshot): Promise<any> {
-    if (this.gs.DEBUG) console.log("resolving notes");
+    this.gs.log("resolving notes");
     
     return new Promise<any>((res, rej) => {
       if (this.ns.notesObservable != null) {
         res(true);
       } else {
-        console.log("notes-resolve: this shouldn't happen");
+        this.gs.log("notes-resolve: this shouldn't happen");
         res(false);
 
         // this.ns.notesCollection = this.ns.afs.collection('notes');

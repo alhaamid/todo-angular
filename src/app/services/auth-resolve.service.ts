@@ -11,7 +11,7 @@ export class AuthResolveService implements Resolve<any> {
   constructor(private authService: AuthService, private router: Router, private gs: GlobalsService) { }
 
   resolve(route: ActivatedRouteSnapshot): Promise<any> {
-    if (this.gs.DEBUG) console.log("resolving..");
+    this.gs.log("resolving..");
     
     return new Promise<any>((res, rej) => {
       if (this.authService.isLoggedIn()) {

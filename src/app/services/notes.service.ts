@@ -16,7 +16,7 @@ export class NotesService {
   nextNoteIndex: number = 0;
 
   constructor(private gs: GlobalsService, private as: AuthService, public afs: AngularFirestore) { 
-    if (gs.DEBUG) console.log("constructor of notes service called");
+    this.gs.log("constructor of notes service called");
 
     this.notesCollection = this.afs.collection<Note>(`${this.gs.NOTES_COLLECTION}`, ref => {
       return ref.where('creatorId', '==', this.as.userDetails.userId).orderBy('noteIndex', 'desc');
@@ -60,9 +60,9 @@ export class NotesService {
     });
   }
 
-  private print(...i) {
-    console.log(...i);
-  }
+  // private print(...i) {
+  //   console.log(...i);
+  // }
 
   private getUniqueId() {
     return this.afs.createId();
