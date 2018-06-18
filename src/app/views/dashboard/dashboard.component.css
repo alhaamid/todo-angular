@@ -11,6 +11,7 @@
 }
 
 .leftbar {
+    float: left;
     width: 50%;
     /* background: lightblue; */
     height: fit-content;
@@ -23,6 +24,7 @@
 }
 
 .rightbar {
+    float: right;
     width: 50%;
     /* background: lightgreen; */
     height: fit-content;
@@ -32,7 +34,7 @@
 .yourNotesSection {
     text-align: left;
     color: black;
-    padding-left: 20%;
+    padding-left: 10%;
 }
 
 .material-icons {
@@ -58,7 +60,7 @@
 .taskRow {
     width: fit-content;
     min-height: var(--input-height);
-    /* background: lightgreen; */
+    /* background: lightyellow; */
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
@@ -66,7 +68,7 @@
 
 h2 {
     font-family: 'Roboto';
-    padding: 0.5em 0;
+    padding: 0.5em 0 0.5em 0;
     text-transform: capitalize;
 }
 
@@ -88,4 +90,16 @@ input {
     padding: 0.5em; 
     /* margin: 0; */
     /* background: red; */
+}
+
+@media(max-width: 600px){
+	.leftbar {
+		width:100%;
+		float:none;
+	}
+
+	.rightbar {
+		width:100%;
+		float:none;
+	}
 }

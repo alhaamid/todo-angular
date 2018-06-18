@@ -56,12 +56,14 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class DashboardComponent implements OnInit {
-  titlePlaceholder: string = 'Title..';
-  taskPlaceholder: string = 'Task..';
+  titlePlaceholder: string = 'Title';
+  taskPlaceholder: string = 'Task';
 
   rForm: FormGroup;
   
   newNote: Note = null;
+  showNewNote: boolean = false;
+
   allNotes: Note[] = null;
   notesSub: Subscription;
 
@@ -98,6 +100,10 @@ export class DashboardComponent implements OnInit {
   deleteNote(noteIndex_: number) {
     this.ns.deleteNote(this.allNotes[noteIndex_]);
     this.allNotes.splice(noteIndex_, 0);
+  }
+
+  toggleNewNote() {
+    this.showNewNote = (this.showNewNote === true ? false : true);
   }
 
   ngOnInit() {}

@@ -20,7 +20,7 @@ a {
 }
 
 #appTitle {
-	/* float: left; */
+	float: left;
     width: 20%;
     height: var(--navbar-height);
     background-color: var(--primary-color);
@@ -35,7 +35,7 @@ a {
 
 #appTitle h1 a {
     font-family: 'Roboto';
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
 }
 
 #navbar {
@@ -47,7 +47,7 @@ a {
 }
 
 .linkBox {
-    /* float: right; */
+    float: right;
     /* height: inherit;
     width: max-content; */
     border-radius: 50%;
@@ -103,7 +103,8 @@ a {
 .dropdown {
     /* background-color: red; */
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    display: none;
     height: var(--navbar-height);
     /* float: right; */
 }
@@ -177,6 +178,15 @@ a {
 
 .linkBox2:hover a i {
     transform: scale(1.2);
+}
+
+@media(max-width: 1000px){
+    .dropdown {
+        display: inline-block;
+    }
+    .rest {
+        display: none;
+    }
 }
 
 /* display: inline-flex;
