@@ -9,6 +9,28 @@
     font-family: 'Open Sans';
 }
 
+.toRight {
+    float: right;
+}
+
+.toLeft {
+    float: left;
+}
+
+.active {
+    background-color: var(--hover-bg-color);
+}
+
+.centerBoth {
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+
 body {
     /* background: lightseagreen; */
 }
