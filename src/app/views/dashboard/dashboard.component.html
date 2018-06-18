@@ -1,4 +1,79 @@
-<div class="container addNoteSection">
+<div class="dashboard">
+
+  <div class="toLeft leftbar">
+    <div class="addNoteSection">
+      <h2>Add a note</h2>
+      <form [formGroup]="rForm">
+        <div>
+          <input type="text" formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}">
+
+          <div *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
+            Title is required.
+          </div>
+        </div>
+
+        <div class="content">
+          <div *ngFor="let newToDo of this.newNote.content.toDos; index as i">
+            <div class="taskRow">
+              <input class="" type="text" [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}">
+              <input class="" type="checkbox" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done">
+              <i class="material-icons" (click)="this.ns.addToDo(this.newNote, i+1, false)">add</i>
+              <i class="material-icons" (click)="this.ns.deleteToDo(this.newNote, i, false)">delete</i>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <input type="submit" value="Add this note" [disabled]="!this.rForm.valid" (click)="addNote()">
+        </div>
+
+      </form>
+    </div>
+
+    <div *ngIf="this.allNotes" class="yourNotesSection">
+      <h2>Your notes</h2>
+      <div *ngFor="let note of this.allNotes; index as noteIndex ">
+        <div class="content"> <!-- @note -->
+          <h3> {{ note.title }} </h3>
+          <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
+            
+            <div class="taskRow">
+              <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}">
+              <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.setNote(note);">
+              <i class="material-icons" (click)="this.ns.addToDo(note, toDoIndex+1, true)">add</i>
+              <i class="material-icons" (click)="this.ns.deleteToDo(note, toDoIndex, true)">delete</i>
+            </div>
+
+          </div>
+          <button (click)="this.ns.deleteNote(note)">Delete</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="this.allNotes" class="toRight rightbar">
+    <h2>Completed notes</h2>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container addNoteSection">
   <h2>Add a Note</h2>
   <form [formGroup]="rForm">
     <div>
@@ -29,7 +104,7 @@
   <div class="container yourNotesSection">
     <h2>Your Notes</h2>
     <div *ngFor="let note of this.allNotes; index as noteIndex ">
-      <div class="content"> <!-- @note -->
+      <div class="content">
         <h3> {{ note.title }} </h3>
         <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
           <div>
@@ -45,7 +120,36 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- old input note section with no validation -->
 <!-- <div class="addNoteSection">
   <h2>Add a Note</h2>
