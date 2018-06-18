@@ -11,14 +11,17 @@ h2 {
     text-transform: capitalize;
 }
 
+.validationError {
+    color: red;
+}
+
 input {
-    /* display: inline; */
     min-height: var(--input-height);
 }
 
-input[type="text"] {
+.mat-form-field {
+    min-height: var(--input-height);
     min-width: var(--min-input-width);
-    /* width: 75%; */
 }
 
 .dashboard {
@@ -73,5 +76,6 @@ input[type="text"] {
     min-height: var(--input-height);
     /* background: lightgreen; */
     display: inline-flex;
+    align-items: center;
     vertical-align: middle;
 }

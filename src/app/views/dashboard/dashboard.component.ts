@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NotesService, Note } from '../../services/notes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from "@angular/animations";
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     // trigger('note', [
     //   transition('void <=> *', animate('1000ms ease-in', keyframes([

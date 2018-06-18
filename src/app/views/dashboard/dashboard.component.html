@@ -5,9 +5,12 @@
       <h2>Add a note</h2>
       <form [formGroup]="rForm">
         <div>
-          <input type="text" formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}">
+          <!-- <input type="text" formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"> -->
+          <mat-form-field>
+            <input matInput formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}">
+          </mat-form-field>
 
-          <div *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
+          <div class="validationError" *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
             Title is required.
           </div>
         </div>
@@ -15,8 +18,12 @@
         <div class="content">
           <div *ngFor="let newToDo of this.newNote.content.toDos; index as i">
             <div class="taskRow">
-              <input class="" type="text" [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}">
-              <input class="" type="checkbox" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done">
+              <!-- <input type="text" [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"> -->
+              <!-- <input type="checkbox" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done"> -->
+              <mat-form-field>
+                <input matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}">
+              </mat-form-field>
+              <mat-checkbox [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done"></mat-checkbox>
               <i class="material-icons" (click)="this.ns.addToDo(this.newNote, i+1, false)">add</i>
               <i class="material-icons" (click)="this.ns.deleteToDo(this.newNote, i, false)">delete</i>
             </div>
@@ -33,13 +40,17 @@
     <div *ngIf="this.allNotes" class="yourNotesSection">
       <h2>Your notes</h2>
       <div *ngFor="let note of this.allNotes; index as noteIndex ">
-        <div class="content"> <!-- @note -->
+        <div class="content">
           <h3> {{ note.title }} </h3>
           <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
             
             <div class="taskRow">
-              <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}">
-              <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.setNote(note);">
+              <mat-form-field>
+                <input matInput [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}">
+              </mat-form-field>
+              <mat-checkbox type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.setNote(note);"></mat-checkbox>
+              <!-- <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="this.ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}"> -->
+              <!-- <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="this.ns.setNote(note);"> -->
               <i class="material-icons" (click)="this.ns.addToDo(note, toDoIndex+1, true)">add</i>
               <i class="material-icons" (click)="this.ns.deleteToDo(note, toDoIndex, true)">delete</i>
             </div>
