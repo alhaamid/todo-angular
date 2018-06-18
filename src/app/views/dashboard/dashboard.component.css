@@ -5,25 +5,6 @@
     /* border: 1px solid black; */
 }
 
-h2 {
-    font-family: 'Roboto';
-    padding: 0.5em 0;
-    text-transform: capitalize;
-}
-
-.validationError {
-    color: red;
-}
-
-input {
-    min-height: var(--input-height);
-}
-
-.mat-form-field {
-    min-height: var(--input-height);
-    min-width: var(--min-input-width);
-}
-
 .dashboard {
     width: 100%;
     height: auto;
@@ -32,17 +13,20 @@ input {
 .leftbar {
     width: 50%;
     /* background: lightblue; */
-}
-
-.rightbar {
-    width: 50%;
-    /* background: lightgreen; */
+    height: fit-content;
 }
 
 .addNoteSection {
     text-align: left;
     color: black;
-    padding-left: 20%;
+    padding-left: 10%;
+}
+
+.rightbar {
+    width: 50%;
+    /* background: lightgreen; */
+    height: fit-content;
+    /* border-left: 3px solid var(--primary-color); */
 }
 
 .yourNotesSection {
@@ -55,7 +39,7 @@ input {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: var(--input-height);  
+    font-size: 2em;  
     display: inline;
     line-height: 1;
     text-transform: none;
@@ -78,4 +62,30 @@ input {
     display: inline-flex;
     align-items: center;
     vertical-align: middle;
+}
+
+h2 {
+    font-family: 'Roboto';
+    padding: 0.5em 0;
+    text-transform: capitalize;
+}
+
+.validationError {
+    color: red;
+}
+
+input {
+    min-height: var(--input-height);
+}
+
+.mat-form-field {
+    min-width: var(--min-input-width);
+    min-height: var(--input-height);
+    height: auto;
+}
+
+.mat-checkbox {
+    padding: 0.5em; 
+    /* margin: 0; */
+    /* background: red; */
 }

@@ -3,6 +3,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 * {
+    --primary-color: #01411c;
+    --hover-color: #13aff0;
+    
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -16,10 +19,6 @@
 
 .toLeft {
     float: left;
-}
-
-.active {
-    background-color: var(--hover-bg-color);
 }
 
 .centerBoth {
