@@ -1,9 +1,80 @@
+<div id="header">
 
-<div>
+  <div id="titleContainer">
+    <div id="titleContent">
+      <h1><a routerLink="{{gs.LANDING_PAGE.ROUTE}}"> {{gs.APP_NAME}} </a></h1>
+    </div>
+  </div>
+
+  <div id="navbarContainer">
+    <div id="navbarContent">
+
+      <div class="dropdown">
+
+        <div title="Details" class="hoverBox centerBoth">
+          <i class="material-icons">more_vert</i>
+        </div>
+
+        <div class="dropdownCol">
+            <div *ngIf="this.authService.isLoggedIn()" title="Your Notes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+              <a class="centerBoth" routerLink="{{gs.LANDING_PAGE.ROUTE}}"><i class="material-icons">notes</i></a>
+            </div>
+            <div *ngIf="this.authService.isLoggedIn()" title="{{remindersTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+              <a class="centerBoth" routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><i class="material-icons">timer</i></a>
+            </div>
+            <div *ngIf="this.authService.isLoggedIn()" title="{{yourAccountTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+              <a class="centerBoth" routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><i class="material-icons">account_box</i></a>
+            </div>
+            <div *ngIf="this.authService.isLoggedIn()" title="{{settingsTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+              <a class="centerBoth" routerLink="{{gs.SETTINGS_PAGE.ROUTE}}"><i class="material-icons">settings</i></a>
+            </div>
+            <div *ngIf="this.authService.isLoggedIn()" title="Logout" class="linkBox">
+              <a class="centerBoth" routerLink="{{this.gs.LOGIN_PAGE.ROUTE}}" (click)="this.authService.logout()"><i class="material-icons">exit_to_app</i></a>
+            </div>
+          </div>
+
+      </div>
+      
+      <div class="flat">
+        <div *ngIf="this.authService.isLoggedIn()" title="Logout" class="linkBox">
+          <a class="centerBoth" routerLink="{{this.gs.LOGIN_PAGE.ROUTE}}" (click)="this.authService.logout()"><i class="material-icons ">exit_to_app</i></a>
+        </div>
+        <div *ngIf="this.authService.isLoggedIn()" title="{{settingsTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+          <a class="centerBoth" routerLink="{{gs.SETTINGS_PAGE.ROUTE}}"><i class="material-icons">settings</i></a>
+        </div>
+        <div *ngIf="this.authService.isLoggedIn()" title="{{yourAccountTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+          <a class="centerBoth" routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><i class="material-icons">account_box</i></a>
+        </div>
+        <div *ngIf="this.authService.isLoggedIn()" title="{{remindersTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+          <a class="centerBoth" routerLink="{{gs.REMINDERS_PAGE.ROUTE}}"><i class="material-icons">timer</i></a>
+        </div>
+        <div *ngIf="this.authService.isLoggedIn()" title="Your Notes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+          <a class="centerBoth" routerLink="{{gs.LANDING_PAGE.ROUTE}}"><i class="material-icons">notes</i></a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+<!-- <div title="{{yourAccountTitle}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
+  <a routerLink="{{gs.YOUR_ACCOUNT_PAGE.ROUTE}}"><div class="iconWrapper"><i class="material-icons">account_box</i></div></a>
+</div> -->
+
+<!-- <i class="material-icons md-48">face</i> -->
+
+<!-- <div>
   <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" routerLink="{{gs.LANDING_PAGE.ROUTE}}"> {{gs.APPNAME}} </a>
+          <a class="navbar-brand" routerLink="{{gs.LANDING_PAGE.ROUTE}}"> {{gs.APP_NAME}} </a>
         </div>
 
         <ul class="nav navbar-nav navbar-right">
@@ -38,15 +109,13 @@
                   Logout
                 </a>
               </li>
-              <!-- <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li> -->
-              <!-- <li *ngIf="this.authService.isLoggedIn()"><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li> -->
             </ul>
           </li>
         </ul>
 
       </div>
     </nav>
-</div>
+</div> -->
 
 
 
@@ -56,3 +125,6 @@
     <li routerLinkActive="active current" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/dashboard" >Dashboard</a></li>
   </ul>
 </nav> -->
+
+<!-- <li routerLinkActive="active " [routerLinkActiveOptions]="{exact: true}"><a routerLink="/settings">Settings</a></li> -->
+<!-- <li *ngIf="this.authService.isLoggedIn()"><a (click)="this.authService.logout()" routerLink="{{this.gs.LOGINPAGE_STR}}">Logout</a></li> -->

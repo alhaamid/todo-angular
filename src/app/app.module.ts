@@ -23,7 +23,12 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NotesService } from './services/notes.service';
 import { NotesResolveService } from './services/notes-resolve.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireStorageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService

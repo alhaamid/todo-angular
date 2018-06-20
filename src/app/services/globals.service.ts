@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalsService {
-  public APPNAME: string = 'To Do';
+  public APP_NAME: string = 'Tasks';
 
   public LANDING_PAGE = new PageDetails('', '/', ['']);
   public LOGIN_PAGE = new PageDetails('login', '/login', ['login']);
@@ -17,9 +15,13 @@ export class GlobalsService {
   public USERS_COLLECTION: string = 'users';
   public NOTES_COLLECTION: string = 'notes';
   
-  public DEBUG: boolean = true;
+  public DEBUG: boolean = false;
 
   constructor() { }
+
+  public log(...a) {
+    if (this.DEBUG) console.log(...a);
+  }
 }
 
 class PageDetails {

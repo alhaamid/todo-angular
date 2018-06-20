@@ -1,0 +1,89 @@
+* {
+    --input-height: 2em;
+    --min-input-width: 500px;
+
+    /* border: 1px solid black; */
+}
+.dashboard {
+    text-align: left;
+    /* background: lightblue; */
+    width: fit-content;
+}
+
+.addNoteSection {
+    /* background: red; */
+    padding-top: 2em;
+}
+
+.newNoteForm {
+    /* background: blue; */
+    padding-top: 2em;
+}
+
+.yourNotesSection {
+    /* background: green; */
+    padding-top: 2em;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;  
+    display: inline;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    cursor: pointer;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+.taskRow {
+    width: fit-content;
+    min-height: var(--input-height);
+    /* background: lightyellow; */
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+button {
+    text-transform: uppercase;
+    background-color: var(--primary-color);
+}
+
+h2 {
+    font-family: 'Roboto';
+    padding: 0.5em 0 0.5em 0;
+    text-transform: capitalize;
+
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+.validationError {
+    color: red;
+}
+
+input {
+    min-height: var(--input-height);
+}
+
+.mat-form-field {
+    min-width: var(--min-all-width);
+    min-height: var(--input-height);
+    height: auto;
+}
+
+.mat-checkbox {
+    padding: 0.5em; 
+    /* margin: 0; */
+    /* background: red; */
+}

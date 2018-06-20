@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NotesService, Note } from '../../services/notes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from "@angular/animations";
@@ -9,27 +9,28 @@ import { Subscription } from 'rxjs';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('note', [
-      transition('void <=> *', animate('1000ms ease-in', keyframes([
-        style({opacity: 0, transform: 'translateY(-20px)', offset: 0}),
-        style({opacity: .5, transform: 'translateY(-10px)', offset: 0.5}),
-        style({opacity: 1, transform: 'translateY(0px)', offset: 1}),
-      ]))),
-      transition('* => void', animate('1000ms ease-out', keyframes([
-        style({opacity: 1, transform: 'translateY(0px)', offset: 0}),
-        style({opacity: 0.5, transform: 'translateY(-10px)', offset: 0.5}),
-        style({opacity: 0, transform: 'translateY(-20px)', offset: 1}),
-      ])))
+    // trigger('note', [
+    //   transition('void <=> *', animate('1000ms ease-in', keyframes([
+    //     style({opacity: 0, transform: 'translateY(-20px)', offset: 0}),
+    //     style({opacity: .5, transform: 'translateY(-10px)', offset: 0.5}),
+    //     style({opacity: 1, transform: 'translateY(0px)', offset: 1}),
+    //   ]))),
+    //   transition('* => void', animate('1000ms ease-out', keyframes([
+    //     style({opacity: 1, transform: 'translateY(0px)', offset: 0}),
+    //     style({opacity: 0.5, transform: 'translateY(-10px)', offset: 0.5}),
+    //     style({opacity: 0, transform: 'translateY(-20px)', offset: 1}),
+    //   ])))
 
-      /**
-       * Usage: 
-       * <p [@note]='state' (click)="animatMe()"> I will animate </p>
-       * animateMe() {
-       *  this.state = (this.state === 'small' ? 'large' : 'small')
-       * }
-       */
-    ]),
+    //   /**
+    //    * Usage: 
+    //    * <p [@note]='state' (click)="animatMe()"> I will animate </p>
+    //    * animateMe() {
+    //    *  this.state = (this.state === 'small' ? 'large' : 'small')
+    //    * }
+    //    */
+    // ]),
     // trigger('note', [ // all is name of animation, array is where different animation specific functions will reside
     //   transition('* => *', [ // any state to any state
     //     query(':enter', style({opacity: 0}), {optional: true}), // assign opacity zero to any elementts that are entering
@@ -55,12 +56,14 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class DashboardComponent implements OnInit {
-  titlePlaceholder: string = 'Title..';
-  taskPlaceholder: string = 'Task..';
+  titlePlaceholder: string = 'Title';
+  taskPlaceholder: string = 'Task';
 
   rForm: FormGroup;
   
   newNote: Note = null;
+  showNewNote: boolean = false;
+
   allNotes: Note[] = null;
   notesSub: Subscription;
 
@@ -69,7 +72,7 @@ export class DashboardComponent implements OnInit {
     this.notesSub = this.ns.notesObservable.subscribe(res => {
       if (!(this.allNotes === res)) {
         this.allNotes = res;
-        if (gs.DEBUG) console.log("notes updated.", this.allNotes, res);
+        this.gs.log("notes updated.", this.allNotes, res);
       }
     })
 
@@ -99,11 +102,15 @@ export class DashboardComponent implements OnInit {
     this.allNotes.splice(noteIndex_, 0);
   }
 
+  toggleNewNoteState() {
+    this.showNewNote = (this.showNewNote === true ? false : true);
+  }
+
   ngOnInit() {}
 
   ngOnDestroy() {
     this.notesSub.unsubscribe();
-    if (this.gs.DEBUG) console.log("unsubscribed from notesObservable");
+    this.gs.log("unsubscribed from notesObservable");
   }
 
 }
