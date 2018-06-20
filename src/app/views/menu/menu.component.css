@@ -21,7 +21,7 @@ a {
 }
 
 #titleContainer {
-    width: 20%;
+    width: 40%;
     height:  inherit;
     height: inherit;
 
@@ -42,7 +42,7 @@ a {
 }
 
 #navbarContainer {
-    width: 80%;
+    width: 60%;
     height: inherit;
     
     display: table-cell;
@@ -111,10 +111,12 @@ a {
 
 
 .dropdown {
-    /* background-color: red; */
     position: relative;
     display: none;
     height: var(--navbar-height);
+
+    border-radius: 50%;
+    /* background-color: red; */
 }
 
 .hoverBox {
@@ -122,24 +124,24 @@ a {
     width: var(--navbar-height);
 
     /* background-color: blue; */
-    border-radius: 50%;
+    /* border-radius: 50%; */
     
     transition: all 0.2s ease-in-out;
 }
 
 .hoverBox i {
     width: fit-content;
-    vertical-align: center;
+    cursor: default;
 
     transition: all 0.2s ease-in-out;
     transform: scale(1);
 }
 
-.hoverBox:hover {
+.dropdown:hover {
     background-color: var(--hover-color);
 }
 
-.hoverBox:hover i {
+.dropdown:hover i {
     transform: scale(1.2);
 }
 

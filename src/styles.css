@@ -5,12 +5,24 @@
 * {
     --primary-color: #01411c;
     --hover-color: #13aff0;
+    --min-all-width: 600px;
     
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     outline: none;
     font-family: 'Open Sans';
+}
+
+.mainContainer {
+    min-width: var(--min-all-width);
+    width: 60%;
+    margin: auto;
+    height: fit-content;
+
+    text-align: center;
+    
+    color: var(--primary-color);
 }
 
 .toRight {
@@ -29,10 +41,6 @@
     display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
-}
-
-body {
-    /* background: lightblue; */
 }
 
 /* * {

@@ -1,29 +1,28 @@
 * {
     --input-height: 2em;
-    --min-input-width: 400px;
+    --min-input-width: 500px;
 
     /* border: 1px solid black; */
 }
-
 .dashboard {
-    width: 100%;
-    height: auto;
-    padding: 5% !important;
-
-    background: lightblue;
+    text-align: left;
+    /* background: lightblue; */
+    width: fit-content;
 }
 
 .addNoteSection {
-    text-align: left;
-    color: var(--primary-color);
+    /* background: red; */
+    padding-top: 2em;
+}
 
-    /* padding: 5% 10%; */
+.newNoteForm {
+    /* background: blue; */
+    padding-top: 2em;
 }
 
 .yourNotesSection {
-    text-align: left;
-    color: var(--primary-color);
-    /* padding-left: 10%; */
+    /* background: green; */
+    padding-top: 2em;
 }
 
 .material-icons {
@@ -55,10 +54,18 @@
     vertical-align: middle;
 }
 
+button {
+    text-transform: uppercase;
+    background-color: var(--primary-color);
+}
+
 h2 {
     font-family: 'Roboto';
     padding: 0.5em 0 0.5em 0;
     text-transform: capitalize;
+
+    display: inline-block; 
+    vertical-align: middle;
 }
 
 .validationError {
@@ -70,7 +77,7 @@ input {
 }
 
 .mat-form-field {
-    min-width: var(--min-input-width);
+    min-width: var(--min-all-width);
     min-height: var(--input-height);
     height: auto;
 }
@@ -80,28 +87,3 @@ input {
     /* margin: 0; */
     /* background: red; */
 }
-
-@media(max-width: 1000px){
-	.leftbar {
-		width: 100%;
-		float: none;
-	}
-
-	.rightbar {
-		width: 100%;
-		float: none;
-    }
-}
-
-
-/* .leftbar {
-    float: left;
-    width: 50%;
-    height: fit-content;
-} */
-
-/* .rightbar {
-    float: right;
-    width: 50%;
-    height: fit-content;
-} */
