@@ -1,12 +1,14 @@
 <div class="dashboard">
 
-  <div class="leftbar">
-    <div class="addNoteSection">
+  <div class="">
+    <button mat-raised-button color="primary" (click)="toggleNewNoteState()">Add note</button>
+
+    <div *ngIf="showNewNote" class="addNoteSection">
       <form [formGroup]="rForm">
         <h2>Add a note</h2>
-        <button *ngIf="rForm.controls['titleValidation'].valid" mat-icon-button type='submit' color="primary" [disabled]="!this.rForm.valid" (click)="addNote()">
+        <!-- <button *ngIf="rForm.controls['titleValidation'].valid" mat-icon-button type='submit' color="primary" [disabled]="!this.rForm.valid" (click)="addNote()">
           <mat-icon class="material-icons">note_add</mat-icon>
-        </button>
+        </button> -->
         <div>
           
           <div class="validationError" *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
@@ -51,7 +53,7 @@
 
   </div>
 
-  <div *ngIf="this.allNotes" class="rightbar">
+  <div *ngIf="this.allNotes">
 
     <div *ngIf="this.allNotes" class="yourNotesSection">
       <h2>Your notes</h2>

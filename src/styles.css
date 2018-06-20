@@ -31,7 +31,9 @@
     -webkit-box-align: center;
 }
 
-body {}
+body {
+    /* background: lightblue; */
+}
 
 /* * {
     margin: 0px;

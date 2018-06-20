@@ -1,9 +1,5 @@
-/* :root {
-    --headerBackground: #01411c;
-} */
-
 * {
-    --navbar-height: 4em;
+    --navbar-height: 5em;
     /* border: 1px solid red; */
 }
 
@@ -16,54 +12,68 @@ a {
 
 #header {
     width: 100%;
-    height: auto;
-}
+    height:  var(--navbar-height);
 
-#appTitle {
-	float: left;
-    width: 20%;
-    height: var(--navbar-height);
-    background-color: var(--primary-color);
-    text-align: left;
-    text-transform: uppercase;
+    display: table;
+    
     color: white;
+    background: var(--primary-color);
 }
 
-#appTitle h1 {
-    width: fit-content;
+#titleContainer {
+    width: 20%;
+    height:  inherit;
+    height: inherit;
+
+    display: table-cell;
+    vertical-align: middle;
 }
 
-#appTitle h1 a {
+#titleContent {
+    float: left;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#titleContent h1 {
+    text-transform: uppercase;
     font-family: 'Roboto';
     letter-spacing: 0.1em;
 }
 
-#navbar {
-	float: right;
-	width: 80%;
-    background-color: var(--primary-color);
-    height: var(--navbar-height);
-    text-align: right;
+#navbarContainer {
+    width: 80%;
+    height: inherit;
+    
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#navbarContent {
+    float: right;
 }
 
 .linkBox {
     float: right;
-    /* height: inherit;
-    width: max-content; */
-    border-radius: 50%;
     height: var(--navbar-height);
     width: var(--navbar-height);
-    color: white;
-
-    background-color: var(--primary-color);
-
     margin-left: 1em;
+
+    display: table;
+
+    border-radius: 50%;
+    background: var(--primary-color);
+
     transition: all 0.2s ease-in-out;
 }
 
 .linkBox a i {
     width: fit-content;
-    margin: 0.5em 1em;
+    height: fit-content;
+
+    display: table-cell;
+    vertical-align: middle;
+
     /* background-color: red; */
     transition: all 0.2s ease-in-out;
 }
@@ -74,7 +84,11 @@ a {
 
 .linkBox:hover a i {
     transform: scale(1.2);
-} 
+}
+
+.active {
+    background-color: var(--hover-color);
+}
 
 .material-icons {
     font-family: 'Material Icons';
@@ -96,33 +110,27 @@ a {
 }
 
 
-.active {
-    background-color: var(--hover-color);
-}
-
 .dropdown {
     /* background-color: red; */
     position: relative;
-    /* display: inline-block; */
     display: none;
     height: var(--navbar-height);
-    /* float: right; */
 }
 
 .hoverBox {
-    float: right;
-    height: inherit;
-    width: max-content;
-    color: white;
+    height: var(--navbar-height);
+    width: var(--navbar-height);
+
     /* background-color: blue; */
+    border-radius: 50%;
+    
     transition: all 0.2s ease-in-out;
 }
 
 .hoverBox i {
     width: fit-content;
-    margin: 0.5em 1em;
-    border-radius: 50%;
-    /* background-color: red; */
+    vertical-align: center;
+
     transition: all 0.2s ease-in-out;
     transform: scale(1);
 }
@@ -135,56 +143,25 @@ a {
     transform: scale(1.2);
 }
 
-.dropdown:hover .hoverBox .dropdownCol {
+.dropdown:hover .dropdownCol {
     display: block;
 }
 
 .dropdownCol {
     display: none;
     position: absolute;
-    background-color: lightgray;
-    width: inherit;
+    width: var(--navbar-height);
+
+    background: transparent;
+    
     z-index: auto !important;
-}
-
-.dropdownRow {
-    width: inherit;
-    background: red;
-}
-
-.linkBox2 {
-    /* float: right; */
-    height: inherit;
-    width: max-content;
-    color: white;
-
-    background-color: var(--primary-color);
-
-    margin-left: 1px;
-    transition: all 0.2s ease-in-out;
-}
-
-.linkBox2 a i {
-    width: fit-content;
-    margin: 0.5em 1em;
-    /* background-color: red; */
-    transition: all 0.2s ease-in-out;
-    transform: scale(1);
-}
-
-.linkBox2:hover {
-    background-color: var(--hover-color);
-}
-
-.linkBox2:hover a i {
-    transform: scale(1.2);
 }
 
 @media(max-width: 1000px){
     .dropdown {
         display: inline-block;
     }
-    .rest {
+    .flat {
         display: none;
     }
 }

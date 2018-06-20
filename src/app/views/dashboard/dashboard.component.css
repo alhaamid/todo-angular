@@ -8,33 +8,22 @@
 .dashboard {
     width: 100%;
     height: auto;
-}
+    padding: 5% !important;
 
-.leftbar {
-    float: left;
-    width: 50%;
-    /* background: lightblue; */
-    height: fit-content;
+    background: lightblue;
 }
 
 .addNoteSection {
     text-align: left;
-    color: black;
-    padding-left: 10%;
-}
+    color: var(--primary-color);
 
-.rightbar {
-    float: right;
-    width: 50%;
-    /* background: lightgreen; */
-    height: fit-content;
-    /* border-left: 3px solid var(--primary-color); */
+    /* padding: 5% 10%; */
 }
 
 .yourNotesSection {
     text-align: left;
-    color: black;
-    padding-left: 10%;
+    color: var(--primary-color);
+    /* padding-left: 10%; */
 }
 
 .material-icons {
@@ -92,14 +81,27 @@ input {
     /* background: red; */
 }
 
-@media(max-width: 600px){
+@media(max-width: 1000px){
 	.leftbar {
-		width:100%;
-		float:none;
+		width: 100%;
+		float: none;
 	}
 
 	.rightbar {
-		width:100%;
-		float:none;
-	}
+		width: 100%;
+		float: none;
+    }
 }
+
+
+/* .leftbar {
+    float: left;
+    width: 50%;
+    height: fit-content;
+} */
+
+/* .rightbar {
+    float: right;
+    width: 50%;
+    height: fit-content;
+} */

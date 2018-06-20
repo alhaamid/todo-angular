@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
     this.allNotes.splice(noteIndex_, 0);
   }
 
-  toggleNewNote() {
+  toggleNewNoteState() {
     this.showNewNote = (this.showNewNote === true ? false : true);
   }
 
