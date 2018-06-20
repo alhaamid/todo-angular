@@ -18,6 +18,11 @@
 .newNoteForm {
     /* background: blue; */
     padding-top: 2em;
+    max-height: fit-content;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
 }
 
 .yourNotesSection {
@@ -49,9 +54,15 @@
     width: fit-content;
     min-height: var(--input-height);
     /* background: lightyellow; */
+    
     display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
+    align-items: center; 
+    /*vertically*/
+    /* vertical-align: middle; */ 
+    /*horizontally*/
+
+    /* display: table-cell;
+    vertical-align: middle; */
 }
 
 button {
