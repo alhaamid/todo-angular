@@ -56,13 +56,16 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class DashboardComponent implements OnInit {
-  titlePlaceholder: string = 'Title';
-  taskPlaceholder: string = 'Task';
+  titlePlaceholder: string = 'Title:';
+  taskPlaceholder: string = 'Task:';
 
   rForm: FormGroup;
   
   newNote: Note = null;
   showNewNote: boolean = true;
+
+  editDictionary: { [id: string]: boolean } = {};
+  formDictionary: { [id: string]: FormGroup } = {};
 
   allNotes: Note[] = null;
   notesSub: Subscription;
@@ -73,6 +76,18 @@ export class DashboardComponent implements OnInit {
       if (!(this.allNotes === res)) {
         this.allNotes = res;
         this.gs.log("notes updated.", this.allNotes, res);
+
+        this.allNotes.map(note => {
+          if (!(this.editDictionary.hasOwnProperty(note.noteId))) {
+            this.editDictionary[note.noteId] = false;
+          }
+
+          if (!(this.formDictionary.hasOwnProperty(note.noteId))) {
+            this.formDictionary[note.noteId] = fb.group({
+              'titleValidation': [null, Validators.required],
+            });
+          }
+        });
       }
     })
 
@@ -104,6 +119,10 @@ export class DashboardComponent implements OnInit {
 
   toggleNewNoteState() {
     this.showNewNote = (this.showNewNote === true ? false : true);
+  }
+
+  toggleEditState(noteId_: string) {
+    this.editDictionary[noteId_] = (this.editDictionary[noteId_] === true ? false : true);
   }
 
   ngOnInit() {}

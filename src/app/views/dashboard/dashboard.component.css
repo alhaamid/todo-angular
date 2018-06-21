@@ -7,7 +7,7 @@
 .dashboard {
     text-align: left;
     /* background: lightblue; */
-    width: fit-content;
+    width: 100%;
 }
 
 .addNoteSection {
@@ -27,7 +27,8 @@
 
 .yourNotesSection {
     /* background: green; */
-    padding-top: 2em;
+    margin-top: 2em;
+    width: inherit;
 }
 
 .material-icons {
@@ -50,8 +51,12 @@
     font-feature-settings: 'liga';
 }
 
+/* .noteDetails {
+    width: inherit;
+} */
+
 .taskRow {
-    width: fit-content;
+    width: 100%;
     min-height: var(--input-height);
     /* background: lightyellow; */
     
@@ -89,8 +94,9 @@ input {
 
 .mat-form-field {
     min-width: var(--min-all-width);
-    min-height: var(--input-height);
+    /* min-height: var(--input-height); */
     height: auto;
+    /* background: blue; */
 }
 
 .mat-checkbox {
