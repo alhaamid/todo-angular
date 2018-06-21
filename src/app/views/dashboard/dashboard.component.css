@@ -31,6 +31,38 @@
     width: inherit;
 }
 
+.table {
+    display: table;
+}
+
+.tableCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.tableInputCell {
+    display: table-cell; 
+    vertical-align: middle; 
+    width: 100%;
+    /* background: hotpink; */
+}
+
+.tableRestCell {
+    display: table-cell; 
+    vertical-align: middle; 
+    min-width: 5em;
+    /* background: fuchsia; */
+}
+
+.cardDetailTaskRow {
+    display: table; 
+    padding-left: 10px
+}
+
+.aNoteContainer {
+    padding-bottom: 30px;
+}
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -51,23 +83,11 @@
     font-feature-settings: 'liga';
 }
 
-/* .noteDetails {
-    width: inherit;
-} */
-
 .taskRow {
+    display: table;
     width: 100%;
     min-height: var(--input-height);
     /* background: lightyellow; */
-    
-    display: inline-flex;
-    align-items: center; 
-    /*vertically*/
-    /* vertical-align: middle; */ 
-    /*horizontally*/
-
-    /* display: table-cell;
-    vertical-align: middle; */
 }
 
 button {
@@ -78,7 +98,6 @@ button {
 h2 {
     font-family: 'Roboto';
     padding: 0.5em 0 0.5em 0;
-    text-transform: capitalize;
 
     display: inline-block; 
     vertical-align: middle;
@@ -93,14 +112,12 @@ input {
 }
 
 .mat-form-field {
-    min-width: var(--min-all-width);
-    /* min-height: var(--input-height); */
+    min-width: 100%;
+    min-height: var(--input-height);
     height: auto;
-    /* background: blue; */
+    /* background: lightgreen; */
 }
 
 .mat-checkbox {
     padding: 0.5em; 
-    /* margin: 0; */
-    /* background: red; */
 }
