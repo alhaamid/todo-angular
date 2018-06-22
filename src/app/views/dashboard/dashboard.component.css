@@ -126,3 +126,7 @@ input {
 .cursorPtr {
     cursor: pointer;
 }
+
+.mat-card {
+    /* background: #3D9970 ; */
+}
