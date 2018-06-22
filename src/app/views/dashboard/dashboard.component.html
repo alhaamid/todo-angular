@@ -32,7 +32,7 @@
             </div>
             <div class="tableRestCell tableCell">
               <button type="button" mat-icon-button (click)="ns.addToDo(this.newNote, i+1, false)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
-              <button type="button" *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">highlight_off</mat-icon></button>
+              <button type="button" *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
             </div>
             
           </div>
@@ -91,7 +91,7 @@
               </div>
               <div class="tableRestCell tableCell">
                 <button type="button" mat-icon-button (click)="ns.addToDo(note, toDoIndex+1, true)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
-                <button type="button" *ngIf="note.content.toDos.length>1"  mat-icon-button (click)="ns.deleteToDo(note, toDoIndex, true)" title="Remove task"><mat-icon class="material-icons">highlight_off</mat-icon></button>
+                <button type="button" *ngIf="note.content.toDos.length>1"  mat-icon-button (click)="ns.deleteToDo(note, toDoIndex, true)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
               </div>
 
             </div>
@@ -129,7 +129,7 @@
   <mat-form-field><input matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
   <mat-checkbox [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
   <button mat-icon-button (click)="ns.addToDo(this.newNote, i+1, false)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
-  <button *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">highlight_off</mat-icon></button>
+  <button *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
 </div> -->
 
 <!-- <button *ngIf="rForm.controls['titleValidation'].valid" mat-icon-button type='submit' color="primary" [disabled]="!this.rForm.valid" (click)="addNote()">
