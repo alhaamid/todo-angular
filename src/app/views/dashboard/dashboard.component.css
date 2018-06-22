@@ -4,7 +4,8 @@
 
     /* border: 1px solid black; */
 }
-.dashboard {
+
+.mainContainer {
     text-align: left;
     /* background: lightblue; */
     width: 100%;
@@ -12,7 +13,7 @@
 
 .addNoteSection {
     /* background: red; */
-    padding-top: 2em;
+    margin-top: 2em;
 }
 
 .newNoteForm {
@@ -28,7 +29,6 @@
 .yourNotesSection {
     /* background: green; */
     margin-top: 2em;
-    width: inherit;
 }
 
 .table {
@@ -101,6 +101,7 @@ h2 {
 
     display: inline-block; 
     vertical-align: middle;
+    width: fit-content;
 }
 
 .validationError {
@@ -120,4 +121,8 @@ input {
 
 .mat-checkbox {
     padding: 0.5em; 
+}
+
+.cursorPtr {
+    cursor: pointer;
 }
