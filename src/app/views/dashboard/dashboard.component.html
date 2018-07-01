@@ -21,7 +21,7 @@
 
             <div class="table">
               <div class="tableInputCell tableCell">
-                <mat-form-field><input matInput formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"></mat-form-field>
+                <mat-form-field><input #tempInput (click)="this.showCursorPosition(tempInput)" matInput formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"></mat-form-field>
               </div>
               <div class="tableRestCell tableCell"></div>
             </div>
@@ -45,8 +45,10 @@
 
     </div>
 
+
+
     <div *ngIf="this.allNotes" class="yourNotesSection">
-      <h2>Your Notes</h2>
+      <!-- <h2>Your Notes</h2> -->
 
       <div class="aNoteContainer" *ngFor="let note of this.allNotes; index as noteIndex">
         

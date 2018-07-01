@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from '@angular/core';
 import { NotesService, Note } from '../../services/notes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from "@angular/animations";
@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
   rForm: FormGroup;
   
   newNote: Note = null;
-  showNewNote: boolean = true;
+  showNewNote: boolean = false;
 
   editDictionary: { [id: string]: boolean } = {};
   formDictionary: { [id: string]: FormGroup } = {};
@@ -123,6 +123,15 @@ export class DashboardComponent implements OnInit {
 
   toggleEditState(noteId_: string) {
     this.editDictionary[noteId_] = (this.editDictionary[noteId_] === true ? false : true);
+  }
+
+  showCursorPosition(inp: HTMLInputElement) {
+    let pos = this.getCursorPosition(inp);
+    console.log(pos);
+  }
+
+  getCursorPosition(elem: HTMLInputElement) {
+    return elem.selectionStart;
   }
 
   ngOnInit() {}
