@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
   rForm: FormGroup;
   
   newNote: Note = null;
-  showNewNote: boolean = false;
+  showNewNote: boolean = true;
 
   editDictionary: { [id: string]: boolean } = {};
   formDictionary: { [id: string]: FormGroup } = {};
@@ -125,13 +125,18 @@ export class DashboardComponent implements OnInit {
     this.editDictionary[noteId_] = (this.editDictionary[noteId_] === true ? false : true);
   }
 
-  showCursorPosition(inp: HTMLInputElement) {
-    let pos = this.getCursorPosition(inp);
-    console.log(pos);
+  getCursorPosition(id_: string) {
+    let inp = <HTMLInputElement>document.getElementById(id_);
+    return {start: inp.selectionStart, end: inp.selectionEnd};
   }
 
-  getCursorPosition(elem: HTMLInputElement) {
-    return elem.selectionStart;
+  addToDoBasedOnCursor(note_: Note, toDoIndex_: number, set_: boolean, id_: string){
+    let cursorInfo = this.getCursorPosition(id_);
+    if (cursorInfo.start === 0) {
+      this.ns.addToDo(note_, toDoIndex_ - 1, set_);
+    } else {
+      this.ns.addToDo(note_, toDoIndex_, set_);
+    }
   }
 
   ngOnInit() {}

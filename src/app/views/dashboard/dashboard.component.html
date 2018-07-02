@@ -21,7 +21,7 @@
 
             <div class="table">
               <div class="tableInputCell tableCell">
-                <mat-form-field><input #tempInput (click)="this.showCursorPosition(tempInput)" matInput formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"></mat-form-field>
+                <mat-form-field><input matInput formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"></mat-form-field>
               </div>
               <div class="tableRestCell tableCell"></div>
             </div>
@@ -29,10 +29,10 @@
             <div class="taskRow" *ngFor="let newToDo of this.newNote.content.toDos; index as i">
               <mat-checkbox class="tableCell" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
               <div class="tableInputCell tableCell">
-                <mat-form-field><input matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
+                <mat-form-field><input id="newTask{{i}}" matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
               </div>
               <div class="tableRestCell tableCell">
-                <button type="button" mat-icon-button (click)="ns.addToDo(this.newNote, i+1, false)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
+                <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(this.newNote, i+1, false, 'newTask'+i)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
                 <button type="button" *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
               </div>
               
@@ -92,10 +92,10 @@
                 
                 <mat-checkbox class="tableCell" [(ngModel)]="todo.done" [ngModelOptions]="{standalone: true}" name="todo.done" title="Done?"></mat-checkbox>
                 <div class="tableInputCell tableCell">
-                  <mat-form-field><input matInput [(ngModel)]="todo.task" [ngModelOptions]="{standalone: true}" name="todo.task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
+                  <mat-form-field><input id="task{{toDoIndex}}" matInput [(ngModel)]="todo.task" [ngModelOptions]="{standalone: true}" name="todo.task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
                 </div>
                 <div class="tableRestCell tableCell">
-                  <button type="button" mat-icon-button (click)="ns.addToDo(note, toDoIndex+1, true)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
+                  <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(note, toDoIndex+1, true, 'task'+toDoIndex)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
                   <button type="button" *ngIf="note.content.toDos.length>1"  mat-icon-button (click)="ns.deleteToDo(note, toDoIndex, true)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
                 </div>
 
