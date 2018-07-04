@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Input, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { NotesService, Note } from '../../services/notes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from "@angular/animations";
 import { GlobalsService } from '../../services/globals.service';
 import { Subscription } from 'rxjs';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
@@ -55,7 +56,7 @@ import { Subscription } from 'rxjs';
     // ])
   ]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewChecked {
   titlePlaceholder: string = 'Title:';
   taskPlaceholder: string = 'Task:';
 
@@ -70,8 +71,13 @@ export class DashboardComponent implements OnInit {
   allNotes: Note[] = null;
   notesSub: Subscription;
 
-  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService) {
+  latestAddedId: string;
+  changeDetector: ChangeDetectorRef;
+
+  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService,
+  changeDetectorRef: ChangeDetectorRef) {
     this.newNote = this.ns.getEmptyNote();
+    this.changeDetector = changeDetectorRef;
     this.notesSub = this.ns.notesObservable.subscribe(res => {
       if (!(this.allNotes === res)) {
         this.allNotes = res;
@@ -127,16 +133,29 @@ export class DashboardComponent implements OnInit {
 
   getCursorPosition(id_: string) {
     let inp = <HTMLInputElement>document.getElementById(id_);
-    return {start: inp.selectionStart, end: inp.selectionEnd};
+    return { start: inp.selectionStart, end: inp.selectionEnd, value: inp.value };
   }
 
-  addToDoBasedOnCursor(note_: Note, toDoIndex_: number, set_: boolean, id_: string){
-    let cursorInfo = this.getCursorPosition(id_);
-    if (cursorInfo.start === 0) {
-      this.ns.addToDo(note_, toDoIndex_ - 1, set_);
+  addToDoBasedOnCursor(note_: Note, currentToDoIndex_: number, set_: boolean, prefix_: string) {
+    let id = `${prefix_}${currentToDoIndex_}`;
+
+    let inputInfo = this.getCursorPosition(id);
+
+    if (inputInfo.start !== 0 || (inputInfo.end === 0 && inputInfo.value.length === 0)) {
+      this.ns.addToDo(note_, currentToDoIndex_+1, set_);
+      this.latestAddedId = `${prefix_}${currentToDoIndex_+1}`;
     } else {
-      this.ns.addToDo(note_, toDoIndex_, set_);
+      this.ns.addToDo(note_, currentToDoIndex_, set_);
+      this.latestAddedId = id;
     }
+  }
+
+  getFocus(index: number, prefix: string): boolean {
+    return `${prefix}${index}` === this.latestAddedId ? true : false;
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetector.detectChanges();
   }
 
   ngOnInit() {}

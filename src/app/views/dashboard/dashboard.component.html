@@ -29,10 +29,19 @@
             <div class="taskRow" *ngFor="let newToDo of this.newNote.content.toDos; index as i">
               <mat-checkbox class="tableCell" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
               <div class="tableInputCell tableCell">
-                <mat-form-field><input id="newTask{{i}}" matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
+                <mat-form-field>
+                  <input 
+                    (keyup.enter)="this.addToDoBasedOnCursor(this.newNote, i, false, 'newTask')" 
+                    id="newTask{{i}}" 
+                    matInput [(ngModel)]="newToDo.task" 
+                    [ngModelOptions]="{standalone: true}" 
+                    name="task" 
+                    placeholder="{{this.taskPlaceholder}}"
+                    [chooseFocus]="getFocus(i, 'newTask')">
+                </mat-form-field>
               </div>
               <div class="tableRestCell tableCell">
-                <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(this.newNote, i+1, false, 'newTask'+i)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
+                <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(this.newNote, i, false, 'newTask')" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
                 <button type="button" *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
               </div>
               
@@ -92,16 +101,24 @@
                 
                 <mat-checkbox class="tableCell" [(ngModel)]="todo.done" [ngModelOptions]="{standalone: true}" name="todo.done" title="Done?"></mat-checkbox>
                 <div class="tableInputCell tableCell">
-                  <mat-form-field><input id="task{{toDoIndex}}" matInput [(ngModel)]="todo.task" [ngModelOptions]="{standalone: true}" name="todo.task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
+                  <mat-form-field>
+                    <input 
+                      (keyup.enter)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')" 
+                      id="task{{toDoIndex}}" 
+                      matInput [(ngModel)]="todo.task" 
+                      [ngModelOptions]="{standalone: true}" 
+                      name="todo.task" 
+                      placeholder="{{this.taskPlaceholder}}">
+                  </mat-form-field>
                 </div>
                 <div class="tableRestCell tableCell">
-                  <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(note, toDoIndex+1, true, 'task'+toDoIndex)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
+                  <button type="button" mat-icon-button (click)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
                   <button type="button" *ngIf="note.content.toDos.length>1"  mat-icon-button (click)="ns.deleteToDo(note, toDoIndex, true)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
                 </div>
 
               </div>
     
-              <button mat-icon-button color="primary" [disabled]="!formDictionary[note.noteId].valid" (click)="toggleEditState(note.noteId); ns.setNote(note);" title="Save"><mat-icon class="material-icons">save</mat-icon></button>
+              <button mat-icon-button type="submit" color="primary" [disabled]="!formDictionary[note.noteId].valid" (click)="toggleEditState(note.noteId); ns.setNote(note);" title="Save"><mat-icon class="material-icons">save</mat-icon></button>
 
             </form>
           </mat-card>
@@ -113,151 +130,3 @@
 
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<!-- <br><button mat-raised-button type='submit' color="primary" [disabled]="!this.rForm.valid" (click)="addNote()">Add this note</button> -->
-<!-- <button mat-icon-button (click)="toggleEditState(note.noteId)" title="Done"><mat-icon class="material-icons">edit</mat-icon></button>
-<h3>{{note.title}}</h3>
-<div class="taskRow" *ngFor="let todo of note.content.toDos; index as toDoIndex;">
-  <h4>{{todo.task}}</h4>
-  <mat-checkbox [(ngModel)]="todo.done" name="todo.done" (change)="ns.setNote(note);" title="Done?"></mat-checkbox>
-</div> -->
-
-
-<!-- <div class="taskRow" *ngFor="let newToDo of note.content.toDos; index as i">
-  <mat-form-field><input matInput [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}"></mat-form-field>
-  <mat-checkbox [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
-  <button mat-icon-button (click)="ns.addToDo(this.newNote, i+1, false)" title="Add task"><mat-icon class="material-icons">add_circle_outline</mat-icon></button>
-  <button *ngIf="this.newNote.content.toDos.length>1" mat-icon-button (click)="ns.deleteToDo(this.newNote, i, false)" title="Remove task"><mat-icon class="material-icons">remove_circle_outline</mat-icon></button>
-</div> -->
-
-<!-- <button *ngIf="rForm.controls['titleValidation'].valid" mat-icon-button type='submit' color="primary" [disabled]="!this.rForm.valid" (click)="addNote()">
-  <mat-icon class="material-icons">note_add</mat-icon>
-</button> -->
-
-
-<!-- <div class="container addNoteSection">
-  <h2>Add a Note</h2>
-  <form [formGroup]="rForm">
-    <div>
-      <input type="text" formControlName="titleValidation" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}">
-
-      <div *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
-        Title is required.
-      </div>
-    </div>
-
-    <div class="content">
-      <div *ngFor="let newToDo of this.newNote.content.toDos; index as i">
-
-        <input type="checkbox" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done">
-        <input type="text" [(ngModel)]="newToDo.task" [ngModelOptions]="{standalone: true}" name="task" placeholder="{{this.taskPlaceholder}}">
-        <span class="glyphicon glyphicon-plus" (click)="ns.addToDo(this.newNote, i+1, false)"></span>
-        <span class="glyphicon glyphicon-trash" (click)="ns.deleteToDo(this.newNote, i, false)"></span>
-
-      </div>
-    </div>
-
-    <input type="submit" value="Add this note" [disabled]="!this.rForm.valid" (click)="addNote()">
-
-  </form>
-</div>
-
-<div *ngIf="this.allNotes">
-  <div class="container yourNotesSection">
-    <h2>Your Notes</h2>
-    <div *ngFor="let note of this.allNotes; index as noteIndex ">
-      <div class="content">
-        <h3> {{ note.title }} </h3>
-        <div *ngFor="let todo of note.content.toDos; index as toDoIndex;">
-          <div>
-          
-            <input type="checkbox" [(ngModel)]="todo.done" name="todo.done" (change)="ns.setNote(note);">
-            <input type="text" [(ngModel)]="todo.task" name="todo.task" (change)="ns.setNote(note)"  placeholder="{{this.taskPlaceholder}}">
-            <span class="glyphicon glyphicon-plus" (click)="ns.addToDo(note, toDoIndex+1, true)"></span>
-            <span class="glyphicon glyphicon-trash" (click)="ns.deleteToDo(note, toDoIndex, true)"></span>
-          
-          </div>
-        </div>
-        <button (click)="ns.deleteNote(note)">Delete</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- old input note section with no validation -->
-<!-- <div class="addNoteSection">
-  <h2>Add a Note</h2>
-  <div class="noteForm">
-
-    <input type="text" [(ngModel)]="this.newNote.title" name="title" placeholder="{{this.titlePlaceholder}}"><br>
-
-    <div class="content">
-      <div *ngFor="let newToDo of this.newNote.content.toDos; index as i">
-
-        <input type="checkbox" [(ngModel)]="newToDo.done" name="done">
-        <input type="text" [(ngModel)]="newToDo.task" name="task" placeholder="{{this.taskPlaceholder}}">
-        <span class="glyphicon glyphicon-plus" (click)="ns.addToDo(this.newNote, i+1, false)"></span>
-        <span class="glyphicon glyphicon-trash" (click)="ns.deleteToDo(this.newNote, i, false)"></span>
-
-      </div>
-    </div>
-
-    <input type="submit" value="Add this note" (click)="ns.addNote(this.newNote)">
-
-  </div>
-</div> -->
-
-
-<!-- <div class="addNoteSection">
-  <h2>Add a Note</h2>
-  <form [formGroup]="rForm">
-    <div>
-      <label>Title
-        <input type="text" formControlName="title">
-      </label>
-      <div *ngIf="!rForm.controls['title'].valid && rForm.controls['title'].touched">
-          Title is required.
-        </div>
-    </div>
-
-    <input type="submit" value="Add this note" (click)="addPost()">
-
-  </form>
-</div> -->

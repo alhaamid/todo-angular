@@ -25,7 +25,8 @@ export class NotesService {
   }
 
   addToDo(note_: Note, toDoIndex_: number, set_: boolean) {
-    note_.content.toDos.splice(toDoIndex_, 0, this.getToDo(false, '', ''));
+    let newToDo = this.getToDo(false, '', '');
+    note_.content.toDos.splice(toDoIndex_, 0, newToDo);
     if (set_) {
       this.setNote(note_);
     }
