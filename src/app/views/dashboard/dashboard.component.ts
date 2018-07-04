@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.Emulated,
   animations: [
     trigger('fade', [
       transition('void => *', animate('500ms ease-in', keyframes([
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
   rForm: FormGroup;
   
   newNote: Note = null;
-  showNewNote: boolean = true;
+  showNewNote: boolean = false;
 
   editDictionary: { [id: string]: boolean } = {};
   formDictionary: { [id: string]: FormGroup } = {};
@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
   }
 
   getCursorPosition(id_: string) {
+    console.log(id_);
     let inp = <HTMLInputElement>document.getElementById(id_);
     return { start: inp.selectionStart, end: inp.selectionEnd, value: inp.value };
   }
