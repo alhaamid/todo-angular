@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  // encapsulation: ViewEncapsulation.Emulated,
+  // encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fade', [
       transition('void => *', animate('500ms ease-in', keyframes([

@@ -61,10 +61,6 @@ export class NotesService {
     });
   }
 
-  // private print(...i) {
-  //   console.log(...i);
-  // }
-
   private getUniqueId() {
     return this.afs.createId();
   }
