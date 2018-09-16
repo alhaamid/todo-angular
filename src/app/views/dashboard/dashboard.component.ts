@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Input, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { NotesService, Note } from '../../services/notes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from "@angular/animations";
 import { GlobalsService } from '../../services/globals.service';
 import { Subscription } from 'rxjs';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('fade', [
       transition('void => *', animate('500ms ease-in', keyframes([
@@ -55,24 +56,44 @@ import { Subscription } from 'rxjs';
     // ])
   ]
 })
-export class DashboardComponent implements OnInit {
-  titlePlaceholder: string = 'Title';
-  taskPlaceholder: string = 'Task';
+export class DashboardComponent implements OnInit, AfterViewChecked {
+  titlePlaceholder: string = 'Title:';
+  taskPlaceholder: string = 'Task:';
 
   rForm: FormGroup;
   
   newNote: Note = null;
-  showNewNote: boolean = true;
+  showNewNote: boolean = false;
+
+  editDictionary: { [id: string]: boolean } = {};
+  formDictionary: { [id: string]: FormGroup } = {};
 
   allNotes: Note[] = null;
   notesSub: Subscription;
 
-  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService) {
+  latestAddedId: string;
+  changeDetector: ChangeDetectorRef;
+
+  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService,
+  changeDetectorRef: ChangeDetectorRef) {
     this.newNote = this.ns.getEmptyNote();
+    this.changeDetector = changeDetectorRef;
     this.notesSub = this.ns.notesObservable.subscribe(res => {
       if (!(this.allNotes === res)) {
         this.allNotes = res;
         this.gs.log("notes updated.", this.allNotes, res);
+
+        this.allNotes.map(note => {
+          if (!(this.editDictionary.hasOwnProperty(note.noteId))) {
+            this.editDictionary[note.noteId] = false;
+          }
+
+          if (!(this.formDictionary.hasOwnProperty(note.noteId))) {
+            this.formDictionary[note.noteId] = fb.group({
+              'titleValidation': [null, Validators.required],
+            });
+          }
+        });
       }
     })
 
@@ -104,6 +125,38 @@ export class DashboardComponent implements OnInit {
 
   toggleNewNoteState() {
     this.showNewNote = (this.showNewNote === true ? false : true);
+  }
+
+  toggleEditState(noteId_: string) {
+    this.editDictionary[noteId_] = (this.editDictionary[noteId_] === true ? false : true);
+  }
+
+  getCursorPosition(id_: string) {
+    console.log(id_);
+    let inp = <HTMLInputElement>document.getElementById(id_);
+    return { start: inp.selectionStart, end: inp.selectionEnd, value: inp.value };
+  }
+
+  addToDoBasedOnCursor(note_: Note, currentToDoIndex_: number, set_: boolean, prefix_: string) {
+    let id = `${prefix_}${currentToDoIndex_}`;
+
+    let inputInfo = this.getCursorPosition(id);
+
+    if (inputInfo.start !== 0 || (inputInfo.end === 0 && inputInfo.value.length === 0)) {
+      this.ns.addToDo(note_, currentToDoIndex_+1, set_);
+      this.latestAddedId = `${prefix_}${currentToDoIndex_+1}`;
+    } else {
+      this.ns.addToDo(note_, currentToDoIndex_, set_);
+      this.latestAddedId = id;
+    }
+  }
+
+  getFocus(index: number, prefix: string): boolean {
+    return `${prefix}${index}` === this.latestAddedId ? true : false;
+  }
+
+  ngAfterViewChecked(): void {
+    this.changeDetector.detectChanges();
   }
 
   ngOnInit() {}

@@ -4,15 +4,16 @@
 
     /* border: 1px solid black; */
 }
-.dashboard {
+
+.mainContainer {
     text-align: left;
     /* background: lightblue; */
-    width: fit-content;
+    width: 100%;
 }
 
 .addNoteSection {
     /* background: red; */
-    padding-top: 2em;
+    margin-top: 2em;
 }
 
 .newNoteForm {
@@ -27,7 +28,39 @@
 
 .yourNotesSection {
     /* background: green; */
-    padding-top: 2em;
+    margin-top: 2em;
+}
+
+.table {
+    display: table;
+}
+
+.tableCell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.tableInputCell {
+    display: table-cell; 
+    vertical-align: middle; 
+    width: 100%;
+    /* background: hotpink; */
+}
+
+.tableRestCell {
+    display: table-cell; 
+    vertical-align: middle; 
+    min-width: 5em;
+    /* background: fuchsia; */
+}
+
+.cardDetailTaskRow {
+    display: table; 
+    padding-left: 10px
+}
+
+.aNoteContainer {
+    padding-bottom: 30px;
 }
 
 .material-icons {
@@ -51,32 +84,23 @@
 }
 
 .taskRow {
-    width: fit-content;
+    display: table;
+    width: 100%;
     min-height: var(--input-height);
     /* background: lightyellow; */
-    
-    display: inline-flex;
-    align-items: center; 
-    /*vertically*/
-    /* vertical-align: middle; */ 
-    /*horizontally*/
-
-    /* display: table-cell;
-    vertical-align: middle; */
 }
 
 button {
     text-transform: uppercase;
-    background-color: var(--primary-color);
 }
 
 h2 {
     font-family: 'Roboto';
     padding: 0.5em 0 0.5em 0;
-    text-transform: capitalize;
 
     display: inline-block; 
     vertical-align: middle;
+    width: fit-content;
 }
 
 .validationError {
@@ -88,13 +112,20 @@ input {
 }
 
 .mat-form-field {
-    min-width: var(--min-all-width);
+    min-width: 100%;
     min-height: var(--input-height);
     height: auto;
+    /* background: lightgreen; */
 }
 
 .mat-checkbox {
     padding: 0.5em; 
-    /* margin: 0; */
-    /* background: red; */
+}
+
+.cursorPtr {
+    cursor: pointer;
+}
+
+.mat-card {
+    /* background: #3D9970 ; */
 }

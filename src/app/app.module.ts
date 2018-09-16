@@ -29,6 +29,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { FocusDirective } from './directives/chooseFocus';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     MenuComponent,
     SettingsComponent,
     RemindersComponent,
-    YourAccountComponent
+    YourAccountComponent,
+    FocusDirective
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatCheckboxModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule
+  ],
+  exports: [
+    FocusDirective
   ],
   providers: [
     GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService
