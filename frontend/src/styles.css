@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
+/* @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~@angular/material/prebuilt-themes/pink-bluegrey.css"; */
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+
+* {
+    --primary-color: #01411c;
+    --hover-color: #13aff0;
+    --min-all-width: 600px;
+    
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Open Sans';
+}
+
+.pageContainer {
+    min-width: var(--min-all-width);
+    width: 60%;
+    margin: auto;
+    height: fit-content;
+
+    /* background: lightgreen; */
+    text-align: center;
+    
+    color: var(--primary-color);
+}
+
+.toRight {
+    float: right;
+}
+
+.toLeft {
+    float: left;
+}
+
+.centerBoth {
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+
+/* * {
+    margin: 0px;
+    position: ;
+} */
+
+/* body {
+    padding: 40px 80px;
+    font-size: 20px;
+}
+
+button {
+    font-size: 18px;
+    border-radius: 1em;
+    background-color: khaki
+} */
+
+/* a {
+    display: block;
+}
+
+a.active {
+    color: red; 
+} */
+
+/* This is for highlighting incorrect first name field */
+/* .form-control.ng-touched.ng-invalid {
+    border: 2px solid red
+} */

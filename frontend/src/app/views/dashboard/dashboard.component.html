@@ -1,0 +1,252 @@
+<div class="pageContainer">
+  <div class="mainContainer">
+
+    <div class="addNoteSection">
+      
+      <h2>Add Note</h2>
+      <button *ngIf="!showNewNote" mat-icon-button (click)="toggleNewNoteState()" title="Show New Note">
+        <mat-icon class="material-icons">expand_more</mat-icon>
+      </button>
+      <button *ngIf="showNewNote" mat-icon-button (click)="toggleNewNoteState()" title="Show New Note">
+        <mat-icon class="material-icons">expand_less</mat-icon>
+      </button>
+
+      <div *ngIf="showNewNote" class="newNoteForm" @fade>
+        <mat-card>
+          <form [formGroup]="rForm">
+            <div class="validationError" *ngIf="!rForm.controls['titleValidation'].valid && rForm.controls['titleValidation'].touched">
+              Title is required.
+            </div>
+
+            <div class="table">
+              <div class="tableInputCell tableCell">
+                <mat-form-field>
+                  <input 
+                    matInput 
+                    formControlName="titleValidation" 
+                    [(ngModel)]="this.newNote.title" 
+                    name="title" 
+                    placeholder="{{this.titlePlaceholder}}">
+                </mat-form-field>
+              </div>
+              <div class="tableRestCell tableCell"></div>
+            </div>
+
+            <div class="taskRow" *ngFor="let newToDo of this.newNote.content.toDos; index as i">
+              <mat-checkbox class="tableCell" [(ngModel)]="newToDo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
+              <div class="tableInputCell tableCell">
+                <mat-form-field>
+                  <input 
+                    (keyup.enter)="this.addToDoBasedOnCursor(this.newNote, i, false, 'newTask')"
+                    id="newTask{{i}}" 
+                    matInput 
+                    [(ngModel)]="newToDo.task" 
+                    [ngModelOptions]="{standalone: true}" 
+                    name="task" 
+                    placeholder="{{this.taskPlaceholder}}"
+                    [chooseFocus]="getFocus(i, 'newTask')">
+                </mat-form-field>
+              </div>
+              <div class="tableRestCell tableCell">
+                <button type="button" 
+                  mat-icon-button 
+                  (click)="this.addToDoBasedOnCursor(this.newNote, i, false, 'newTask')" 
+                  title="Add task">
+                  <mat-icon class="material-icons">add_circle_outline</mat-icon>
+                </button>
+                <button type="button" 
+                  *ngIf="this.newNote.content.toDos.length>1" 
+                  mat-icon-button 
+                  (click)="ns.deleteToDo(this.newNote, i, false)" 
+                  title="Remove task">
+                  <mat-icon class="material-icons">remove_circle_outline</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <button mat-icon-button 
+              color="primary" 
+              type='button' 
+              [disabled]="!rForm.valid" 
+              (click)="addNote()" 
+              title="Save">
+              <mat-icon class="material-icons">save</mat-icon>
+            </button>
+          </form>
+        </mat-card>
+      </div>
+
+    </div>
+
+
+
+    <div *ngIf="this.allNotes" class="yourNotesSection">
+      <!-- <h2>Your Notes</h2> -->
+
+      <div class="aNoteContainer" *ngFor="let note of this.allNotes; index as noteIndex">
+        
+        <div *ngIf="!editDictionary[note.noteId]">
+          <mat-card>
+            <mat-card-header>
+              <h2 class="cursorPtr" (click)="toggleEditState(note.noteId)">{{note.title}}</h2>
+            </mat-card-header>
+            
+            <mat-card-content>
+              <div class="cardDetailTaskRow" *ngFor="let todo of note.content.toDos; index as toDoIndex;">
+                <mat-checkbox class="tableCell" [(ngModel)]="todo.done" name="todo.done" (change)="ns.setNote(note);" title="Done?">
+                  <h3 class="tableCell cursorPtr">{{todo.task}}</h3>
+                </mat-checkbox>
+                
+              </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button type="button" 
+                mat-icon-button color="primary" 
+                (click)="toggleEditState(note.noteId)" 
+                title="Edit">
+                <mat-icon class="material-icons">edit</mat-icon>
+              </button>
+              <button type="button" 
+                mat-icon-button color="warn" 
+                (click)="ns.deleteNote(note)" 
+                title="Delete">
+                <mat-icon class="material-icons">delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+        <div *ngIf="editDictionary[note.noteId]">
+          <mat-card>
+              <form [formGroup]="formDictionary[note.noteId]">
+                <div class="validationError" *ngIf="!formDictionary[note.noteId].controls['titleValidation'].valid && formDictionary[note.noteId].controls['titleValidation'].touched">
+                  Title is required.
+                </div>
+    
+                <div class="table">
+                  <div class="tableInputCell tableCell">
+                    <mat-form-field>
+                      <input 
+                        matInput 
+                        formControlName="titleValidation" 
+                        [(ngModel)]="note.title" 
+                        name="title" 
+                        placeholder="{{this.titlePlaceholder}}">
+                    </mat-form-field>
+                  </div>
+                  <div class="tableRestCell tableCell"></div>
+                </div>
+    
+                <div class="taskRow" *ngFor="let todo of note.content.toDos; index as toDoIndex;">
+                  <mat-checkbox class="tableCell" [(ngModel)]="todo.done" [ngModelOptions]="{standalone: true}" name="done" title="Done?"></mat-checkbox>
+                  <div class="tableInputCell tableCell">
+                    <mat-form-field>
+                      <input 
+                        (keyup.enter)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')" 
+                        id="task{{toDoIndex}}" 
+                        matInput 
+                        [(ngModel)]="todo.task" 
+                        [ngModelOptions]="{standalone: true}" 
+                        name="todo.task" 
+                        placeholder="{{this.taskPlaceholder}}"
+                        [chooseFocus]="getFocus(toDoIndex, 'task')">
+                    </mat-form-field>
+                  </div>
+                  <div class="tableRestCell tableCell">
+                      <button type="button"
+                      mat-icon-button 
+                      (click)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')" 
+                      title="Add task">
+                      <mat-icon class="material-icons">add_circle_outline</mat-icon>
+                    </button>
+                    <button type="button" 
+                      *ngIf="note.content.toDos.length>1" 
+                      mat-icon-button 
+                      (click)="ns.deleteToDo(note, toDoIndex, true)" 
+                      title="Remove task">
+                      <mat-icon class="material-icons">remove_circle_outline</mat-icon>
+                    </button>
+                  </div>
+                </div>
+    
+                <button mat-icon-button 
+                  type="button"
+                  color="primary" 
+                  [disabled]="!formDictionary[note.noteId].valid" 
+                  (click)="toggleEditState(note.noteId); ns.setNote(note);" 
+                  title="Save">
+                  <mat-icon class="material-icons">save</mat-icon>
+                </button>
+              </form>
+          </mat-card>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- <form [formGroup]="formDictionary[note.noteId]">
+  <div class="validationError" *ngIf="!formDictionary[note.noteId].controls['titleValidation'].valid && formDictionary[note.noteId].controls['titleValidation'].touched">
+    Title is required.
+  </div>
+
+  <div class="table">
+    <div class="tableInputCell tableCell">
+      <mat-form-field>
+        <input 
+          matInput 
+          formControlName="titleValidation" 
+          [(ngModel)]="note.title" 
+          name="title" 
+          placeholder="{{this.titlePlaceholder}}">
+      </mat-form-field>
+    </div>
+    <div class="tableRestCell tableCell"></div>
+  </div>
+
+  <div class="taskRow" *ngFor="let todo of note.content.toDos; index as toDoIndex;">
+    <mat-checkbox class="tableCell" [(ngModel)]="todo.done" [ngModelOptions]="{standalone: true}" name="todo.done" title="Done?"></mat-checkbox>
+    <div class="tableInputCell tableCell">
+      <mat-form-field>
+        <input 
+          (keyup.enter)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')"
+          id="task{{toDoIndex}}" 
+          matInput 
+          [(ngModel)]="todo.task" 
+          [ngModelOptions]="{standalone: true}" 
+          name="todo.task" 
+          placeholder="{{this.taskPlaceholder}}"
+          [chooseFocus]="getFocus(toDoIndex, 'task')">
+      </mat-form-field>
+    </div>
+    <div class="tableRestCell tableCell">
+      <button type="button"
+        mat-icon-button 
+        (click)="this.addToDoBasedOnCursor(note, toDoIndex, true, 'task')" 
+        title="Add task">
+        <mat-icon class="material-icons">add_circle_outline</mat-icon>
+      </button>
+      <button type="button" 
+        *ngIf="note.content.toDos.length>1" 
+        mat-icon-button 
+        (click)="ns.deleteToDo(note, toDoIndex, true)" 
+        title="Remove task">
+        <mat-icon class="material-icons">remove_circle_outline</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <button mat-icon-button 
+    type="submit"
+    color="primary" 
+    [disabled]="!formDictionary[note.noteId].valid" 
+    (click)="toggleEditState(note.noteId); ns.setNote(note);" 
+    title="Save">
+    <mat-icon class="material-icons">save</mat-icon>
+  </button>
+</form> -->
