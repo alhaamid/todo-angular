@@ -4,7 +4,6 @@ import { AuthService } from './services/auth.service';
 import { GlobalsService } from './services/globals.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,7 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { FocusDirective } from './directives/chooseFocus';
-import { TestingBackendService } from './services/testing-backend.service';
+import { RoutingService } from './services/routing.service';
 
 @NgModule({
   declarations: [
@@ -62,14 +61,13 @@ import { TestingBackendService } from './services/testing-backend.service';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatDividerModule,
-    HttpClientModule
+    MatDividerModule
   ],
   exports: [
     FocusDirective
   ],
   providers: [
-    GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService, TestingBackendService
+    GlobalsService, AuthService, AuthGuardService, AuthResolveService, NotesService, NotesResolveService, RoutingService
   ],
   bootstrap: [AppComponent]
 })

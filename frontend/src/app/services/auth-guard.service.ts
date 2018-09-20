@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 import { AuthService, FirestoreUser } from './auth.service';
 import { Router, CanActivate } from '@angular/router';
 import { of } from 'rxjs';
+import { RoutingService } from './routing.service';
 
 @Injectable()
 export class AuthGuardService {
 
-  constructor(private router: Router, private authService: AuthService, private gs: GlobalsService, private afs: AngularFirestore) { }
+  constructor(private router: Router, private authService: AuthService, private gs: GlobalsService, private rs: RoutingService, private afs: AngularFirestore) { }
 
   canActivate(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
@@ -30,8 +31,8 @@ export class AuthGuardService {
             this.authService.userDetailsObservable = null;
             this.gs.log("Authenticated in auth-guard:", this.authService.isLoggedIn());
             this.gs.log("navigating to login page");
-            if (!(this.router.url === this.gs.LOGIN_PAGE.ROUTE)) {
-              this.router.navigate(this.gs.LOGIN_PAGE.NAV);
+            if (!(this.router.url === this.rs.LOGIN_PAGE.ROUTE)) {
+              this.router.navigate(this.rs.LOGIN_PAGE.NAV);
             }
             resolve(false);
           }

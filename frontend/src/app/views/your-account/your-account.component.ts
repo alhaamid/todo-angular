@@ -11,7 +11,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class YourAccountComponent implements OnInit {
   detailsSubscription: Subscription = new Subscription();
 
-  constructor(private gs: GlobalsService, private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
 
   ngOnInit() {

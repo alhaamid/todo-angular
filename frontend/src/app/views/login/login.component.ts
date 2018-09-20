@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { RoutingService } from '../../services/routing.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   userName: string;
   nextPage: string = '';
 
-  constructor(private authService: AuthService, private gs: GlobalsService, private router: Router) {
+  constructor(private authService: AuthService, private gs: GlobalsService, private router: Router, private rs: RoutingService) {
     if (this.gs.DEBUG) console.log("loaded login. loggedin: ", authService.isLoggedIn());
   }
 
@@ -23,11 +24,11 @@ export class LoginComponent implements OnInit {
     this.authService.signInWithGoogle()
     .then(userCredentials => {
       if (userCredentials) {
-        this.router.navigate(this.gs.LANDING_PAGE.NAV);
+        this.router.navigate(this.rs.LANDING_PAGE.NAV);
       }
     }).catch(errorMsg => {
       // show error for rejection
-      this.router.navigate(this.gs.LOGIN_PAGE.NAV);
+      this.router.navigate(this.rs.LOGIN_PAGE.NAV);
     })
   }
 

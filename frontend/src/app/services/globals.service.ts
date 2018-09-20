@@ -3,21 +3,18 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class GlobalsService {
   public APP_NAME: string = 'Tasks';
-
-  public LANDING_PAGE = new PageDetails('', '/', ['']);
-  public LOGIN_PAGE = new PageDetails('login', '/login', ['login']);
-  public REMINDERS_PAGE = new PageDetails('reminders', '/reminders', ['reminders']);
-  public SETTINGS_PAGE = new PageDetails('settings', '/settings', ['settings']);
-  public YOUR_ACCOUNT_PAGE = new PageDetails('your-account', '/your-account', ['your-account']);
 
   public USERS_COLLECTION: string = 'users';
   public NOTES_COLLECTION: string = 'notes';
   
   public DEBUG: boolean = false;
 
-  constructor() { }
+  constructor () {
+
+  }
 
   public log(...a) {
     if (this.DEBUG) console.log(...a);
@@ -25,7 +22,7 @@ export class GlobalsService {
 }
 
 class PageDetails {
-  constructor(public STR: string, public ROUTE: string, public NAV: string[]) {}
+  constructor (public STR: string, public ROUTE: string, public NAV: string[]) {}
 }
 
 interface GlobalVars {
