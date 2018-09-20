@@ -22,9 +22,16 @@ a {
 
 #titleContainer {
     width: 40%;
-    height:  inherit;
     height: inherit;
 
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#navbarContainer {
+    width: 60%;
+    height: inherit;
+    
     display: table-cell;
     vertical-align: middle;
 }
@@ -39,14 +46,6 @@ a {
     text-transform: uppercase;
     font-family: 'Roboto';
     letter-spacing: 0.1em;
-}
-
-#navbarContainer {
-    width: 60%;
-    height: inherit;
-    
-    display: table-cell;
-    vertical-align: middle;
 }
 
 #navbarContent {
@@ -66,6 +65,12 @@ a {
 
     transition: all 0.2s ease-in-out;
 }
+
+/* .mat-progress-spinner {
+    border-radius: 50%;
+    vertical-align: middle;
+    background-color: yellow;
+} */
 
 .linkBox a i {
     width: fit-content;

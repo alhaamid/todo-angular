@@ -33,6 +33,8 @@ export class AuthService {
 
   signInWithGoogle() {
     return new Promise<any> ((resolve, reject) => {
+      this.gs.IN_PROGRESS = true;
+      
       let provider = new firebase.auth.GoogleAuthProvider();
       this.afa.auth.signInWithPopup(provider)
       .then(credentials => {

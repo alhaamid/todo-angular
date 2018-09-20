@@ -12,9 +12,9 @@ export class GlobalsService {
   
   public DEBUG: boolean = false;
 
-  constructor () {
+  public IN_PROGRESS = false;
 
-  }
+  constructor () {}
 
   public log(...a) {
     if (this.DEBUG) console.log(...a);

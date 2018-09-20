@@ -3,6 +3,7 @@
   <div id="titleContainer">
     <div id="titleContent">
       <h1><a routerLink="{{rs.LANDING_PAGE.ROUTE}}"> {{gs.APP_NAME}} </a></h1>
+      <mat-progress-bar *ngIf="gs.IN_PROGRESS" class="example-margin" mode="indeterminate"></mat-progress-bar>
     </div>
   </div>
 
@@ -51,6 +52,7 @@
         <div *ngIf="this.authService.isLoggedIn()" title="Your Notes" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="linkBox">
           <a class="centerBoth" routerLink="{{rs.LANDING_PAGE.ROUTE}}"><i class="material-icons">notes</i></a>
         </div>
+
       </div>
       
     </div>

@@ -33,6 +33,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { FocusDirective } from './directives/chooseFocus';
 import { RoutingService } from './services/routing.service';
+// import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { RoutingService } from './services/routing.service';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressBarModule
   ],
   exports: [
     FocusDirective

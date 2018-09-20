@@ -17,7 +17,7 @@ export class AuthResolveService implements Resolve<any> {
       if (this.authService.isLoggedIn()) {
         res(this.authService.userDetailsObservable);
       } else {
-        res(false);
+        rej(false);
       }
     })
   }

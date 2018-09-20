@@ -33,8 +33,15 @@ export class NotesService {
   }
 
   setNote(note_: Note) {
+    this.gs.IN_PROGRESS = true;
     this.updateLastDones(note_);
-    this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(note_.noteId).set(note_);
+    this.afs.collection(`${this.gs.NOTES_COLLECTION}`).doc(note_.noteId).set(note_)
+    .then(_ => {
+      this.gs.IN_PROGRESS = false;
+    })
+    .catch(_ => {
+      this.gs.IN_PROGRESS = true;
+    });
   }
 
   deleteToDo(note_: Note, toDoIndex_: number, set_: boolean) {
@@ -45,7 +52,14 @@ export class NotesService {
   }
 
   deleteNote(note_: Note) {
-    this.afs.doc(`${this.gs.NOTES_COLLECTION}/${note_.noteId}`).delete();
+    this.gs.IN_PROGRESS = true;
+    this.afs.doc(`${this.gs.NOTES_COLLECTION}/${note_.noteId}`).delete()
+    .then(_ => {
+      this.gs.IN_PROGRESS = false;
+    })
+    .catch(_ => {
+      this.gs.IN_PROGRESS = true;
+    });;
   }
 
   // Utilities

@@ -74,8 +74,9 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
   latestAddedId: string;
   changeDetector: ChangeDetectorRef;
 
-  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService,
-  changeDetectorRef: ChangeDetectorRef) {
+  constructor(private ns: NotesService, private fb: FormBuilder, private gs: GlobalsService, changeDetectorRef: ChangeDetectorRef) {
+    this.gs.IN_PROGRESS = false;
+
     this.newNote = this.ns.getEmptyNote();
     this.changeDetector = changeDetectorRef;
     this.notesSub = this.ns.notesObservable.subscribe(res => {
@@ -132,7 +133,6 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
   }
 
   getCursorPosition(id_: string) {
-    console.log(id_);
     let inp = <HTMLInputElement>document.getElementById(id_);
     return { start: inp.selectionStart, end: inp.selectionEnd, value: inp.value };
   }

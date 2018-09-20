@@ -19,6 +19,7 @@ export class AuthGuardService {
       } else {
         /* The following block makes sure that if the user didn't log out, 
         then the user won't be redirected to the login page and would be logged in behind the scene. */
+        this.gs.IN_PROGRESS = true;
         this.authService.authState.subscribe( (user) => {
           if (user) {
             this.authService.userDetailsObservable = this.afs.doc<FirestoreUser>(`${this.gs.USERS_COLLECTION}/${user.uid}`).valueChanges();
