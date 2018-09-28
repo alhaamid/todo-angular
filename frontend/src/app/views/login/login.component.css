@@ -1,0 +1,20 @@
+#header {
+    width: 100%;
+    height: fit-content;
+
+    text-align: center;
+    
+    color: black;
+}
+
+.btn {
+    border-radius: 50%;
+    border-width: 0px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.img {
+    width: 64px;
+    height: 64px;
+}
